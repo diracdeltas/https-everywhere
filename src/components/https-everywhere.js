@@ -135,14 +135,7 @@ function xpcom_generateQI(iids) {
   return new Function("iid", src + "throw Components.results.NS_ERROR_NO_INTERFACE;");
 }
 
-function xpcom_checkInterfaces(iid,iids,ex) {
-  for (var j = iids.length; j-- >0;) {
-    if (iid.equals(iids[j])) return true;
-  }
-  throw ex;
-}
-
-INCLUDE('ChannelReplacement', 'IOUtil', 'HTTPSRules', 'HTTPS', 'Thread', 'ApplicableList');
+INCLUDE('ChannelReplacement', 'HTTPSRules', 'HTTPS', 'Thread', 'ApplicableList');
 
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
@@ -167,13 +160,6 @@ function StorageController(command) {
   this.wrappedJSObject = this;
 }
 
-/*var Controller = Class("Controller", XPCOM(CI.nsIController), {
-  init: function (command, data) {
-      this.command = command;
-      this.data = data;
-  },
-  supportsCommand: function (cmd) cmd === this.command
-});*/
 
 function HTTPSEverywhere() {
 
@@ -217,43 +203,6 @@ function HTTPSEverywhere() {
 
   return;
 }
-
-
-// nsIContentPolicy interface
-// we use numeric constants for performance sake: 
-const TYPE_OTHER = 1;
-const TYPE_SCRIPT = 2;
-const TYPE_IMAGE = 3;
-const TYPE_STYLESHEET = 4;
-const TYPE_OBJECT = 5;
-const TYPE_DOCUMENT = 6;
-const TYPE_SUBDOCUMENT = 7;
-const TYPE_REFRESH = 8;
-const TYPE_XBL = 9;
-const TYPE_PING = 10;
-const TYPE_XMLHTTPREQUEST = 11;
-const TYPE_OBJECT_SUBREQUEST = 12;
-const TYPE_DTD  = 13;
-const TYPE_FONT = 14;
-const TYPE_MEDIA = 15;  
-// --------------
-// REJECT_SERVER = -3
-// ACCEPT = 1
-
-
-// Some of these types are known by arbitrary assertion at
-// https://bugzilla.mozilla.org/show_bug.cgi?id=677643#c47
-// TYPE_FONT was required to fix https://trac.torproject.org/projects/tor/ticket/4194
-// TYPE_SUBDOCUMENT was required to fix https://trac.torproject.org/projects/tor/ticket/4149
-// I have NO IDEA why JS won't let me use the constants above in defining this
-const shouldLoadTargets = {
-  1 : true,
-  3 : true,
-  5 : true,
-  12 : true,
-  14 : true,
-  7 : true
-};
 
 
 
@@ -322,7 +271,7 @@ HTTPSEverywhere.prototype = {
   _xpcom_categories: [
     {
       category: "app-startup",
-    },
+    }
   ],
 
   // QueryInterface implementation, e.g. using the generateQI helper
@@ -335,10 +284,6 @@ HTTPSEverywhere.prototype = {
       Components.interfaces.nsIChannelEventSink ]),
 
   wrappedJSObject: null,  // Initialized by constructor
-
-  getWeakReference: function () {
-    return Components.utils.getWeakReference(this);
-  },
 
   // An "expando" is an attribute glued onto something.  From NoScript.
   getExpando: function(domWin, key) {
@@ -355,11 +300,9 @@ HTTPSEverywhere.prototype = {
     } catch(e) {
       // Firefox 3.5
       this.log(WARN,"exception in getExpando");
-      this.getExpando = this.getExpando_old;
-      this.setExpando = this.setExpando_old;
-      return this.getExpando_old(domWin, key, null);
     }
   },
+
   setExpando: function(domWin, key, value) {
     var c = domWin.controllers.getControllerForCommand("https-everywhere-storage");
     try {
@@ -373,37 +316,6 @@ HTTPSEverywhere.prototype = {
       c.data[key] = value;
     } catch(e) {
       this.log(WARN,"exception in setExpando");
-      this.getExpando = this.getExpando_old;
-      this.setExpando = this.setExpando_old;
-      this.setExpando_old(domWin, key, value);
-    }
-  },
-
-  // This method is straight out of NoScript... we fall back to it in FF 3.*?
-  getExpando_old: function(domWin, key, defValue) {
-    var domObject = domWin.document;
-    return domObject && domObject.__httpsEStorage && domObject.__httpsEStorage[key] || 
-           (defValue ? this.setExpando(domObject, key, defValue) : null);
-  },
-  setExpando_old: function(domWin, key, value) {
-    var domObject = domWin.document;
-    if (!domObject) return null;
-    if (!domObject.__httpsEStorage) domObject.__httpsEStorage = {};
-    if (domObject.__httpsEStorage) domObject.__httpsEStorage[key] = value;
-    else this.log(WARN, "Warning: cannot set expando " + key + " to value " + value);
-    return value;
-  },
-
-  // We use onLocationChange to make a fresh list of rulesets that could have
-  // applied to the content in the current page (the "applicable list" is used
-  // for the context menu in the UI).  This will be appended to as various
-  // content is embedded / requested by JavaScript.
-  onLocationChange: function(wp, req, uri) {
-    if (wp instanceof CI.nsIWebProgress) {
-      if (!this.newApplicableListForDOMWin(wp.DOMWindow)) 
-        this.log(WARN,"Something went wrong in onLocationChange");
-    } else {
-      this.log(WARN,"onLocationChange: no nsIWebProgress");
     }
   },
 
