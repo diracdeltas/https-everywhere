@@ -91,7 +91,7 @@
 		"google.fr", some look like "google.co.jp",
 		and some crazy ones like "google.com.au"	-->
 
-	<rule from="^http(?:s)?://(?:www\.)?google(?:\.com?)?\.(?:[a-z]{2})"
+	<rule from="^http(?:s)?://(?:www\.)?google(?:\.com?)?\.(?:[a-z]{2})/"
 		to="https://duckduckgo.com/" />
 
 	<!--	Language preference setting	-->
