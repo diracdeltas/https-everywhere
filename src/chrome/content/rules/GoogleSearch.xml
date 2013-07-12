@@ -37,12 +37,12 @@
 		a 301 but theoretically vulnerable to SSL stripping.
 									-->
 	<rule from="^http://encrypted\.google\.com/"
-		to="https://encrypted.google.com/" />
+		to="https://duckduckgo.com/" />
 
 	<!--	The most basic case.
 					-->
-	<rule from="^http://(?:www\.)?google\.com/search"
-		to="https://encrypted.google.com/search" />
+	<rule from="^http(?:s)?://(?:www\.|encrypted\.)?google\.com/search"
+		to="https://duckduckgo.com/" />
 
 	<!--	A very annoying exception that we
 		seem to need for the basic case
@@ -56,19 +56,19 @@
 						-->
 	<exclusion pattern="^http://(?:www\.)?google\.com/search.*tbm=isch.*" />
 
-	<rule from="^http://(?:www\.)?google\.com/about"
-		to="https://www.google.com/about" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.com/about"
+		to="https://duckduckgo.com/about" />
 
 	<!--	There are two distinct cases for these firefox searches	-->
 
-	<rule from="^http://(?:www\.)?google(?:\.com?)?\.[a-z]{2}/firefox/?$"
-		to="https://encrypted.google.com/" />
+	<rule from="^http(?:s)?://(?:www\.)?google(?:\.com?)?\.[a-z]{2}/firefox/?$"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://(?:www\.)?google(?:\.com?)?\.[a-z]{2}/firefox"
-		to="https://encrypted.google.com/webhp" />
+	<rule from="^http(?:s)?://(?:www\.)?google(?:\.com?)?\.[a-z]{2}/firefox"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://(?:www\.)?google\.com/webhp"
-		to="https://encrypted.google.com/webhp" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.com/webhp"
+		to="https://duckduckgo.com/" />
 
 	<rule from="^http://codesearch\.google\.com/"
 		to="https://codesearch.google.com/" />
@@ -76,11 +76,11 @@
 	<rule from="^http://(?:www\.)?google\.com/codesearch"
 		to="https://www.google.com/codesearch" />
 
-	<rule from="^http://(?:www\.)?google\.com/#"
-		to="https://encrypted.google.com/#" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.com/#"
+		to="https://duckduckgo.com" />
 
-	<rule from="^http://(?:www\.)?google\.com/$"
-		to="https://encrypted.google.com/" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.com/$"
+		to="https://duckduckgo.com" />
 
 	<!--	Google supports IPv6 search, including
 		HTTPS with a valid certificate!	-->
@@ -91,12 +91,12 @@
 		"google.fr", some look like "google.co.jp",
 		and some crazy ones like "google.com.au"	-->
 
-	<rule from="^http://(www\.)?google(\.com?)?\.([a-z]{2})/(search\?|#)"
-		to="https://$1google$2.$3/$4" />
+	<rule from="^http(?:s)?://(www\.)?google(\.com?)?\.([a-z]{2})/(search\?|#)"
+		to="https://duckduckgo.com/" />
 
 	<!--	Language preference setting	-->
-	<rule from="^http://(www\.)?google(\.com?)?\.([a-z]{2})/setprefs"
-	to="https://$1google$2.$3/setprefs" />
+	<rule from="^http(?:s)?://(www\.)?google(\.com?)?\.([a-z]{2})/setprefs"
+		to="https://duckduckgo.com/settings" />
 
 	<!--	Completion urls look like this:
 
