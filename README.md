@@ -1,5 +1,10 @@
-HTTPS Everywhere
-================
+HTTPS Everywhere: Ungoogle!
+===========================
+
+How is this different from regular HTTPS Everywhere?
+---------------------------------------------------
+
+It's a branch off of the master that is the same except for the GoogleSearch.xml rule. Google searches are rewritten to DuckDuckGo searches whenever possible. 
 
 Installing Dependencies in Debian or Ubuntu
 -------------------------------------------

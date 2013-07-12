@@ -1,4 +1,9 @@
 <ruleset name="Google Search">
+        
+	<!--
+	     Note this version is for people who don't want
+             to use Google Searches at all.
+                                                         -->
 
 	<target host="google.com" />
 	<target host="*.google.com" />
