@@ -77,10 +77,10 @@
 		to="https://www.google.com/codesearch" />
 
 	<rule from="^http(?:s)?://(?:www\.)?google\.com/#"
-		to="https://duckduckgo.com" />
+		to="https://duckduckgo.com/" />
 
 	<rule from="^http(?:s)?://(?:www\.)?google\.com/$"
-		to="https://duckduckgo.com" />
+		to="https://duckduckgo.com/" />
 
 	<!--	Google supports IPv6 search, including
 		HTTPS with a valid certificate!	-->
@@ -91,11 +91,11 @@
 		"google.fr", some look like "google.co.jp",
 		and some crazy ones like "google.com.au"	-->
 
-	<rule from="^http(?:s)?://(www\.)?google(\.com?)?\.([a-z]{2})/(search\?|#)"
+	<rule from="^http(?:s)?://(?:www\.)?google(?:\.com?)?\.(?:[a-z]{2})"
 		to="https://duckduckgo.com/" />
 
 	<!--	Language preference setting	-->
-	<rule from="^http(?:s)?://(www\.)?google(\.com?)?\.([a-z]{2})/setprefs"
+	<rule from="^http(?:s)?://(?:www\.)?google(\.com?)?\.(?:[a-z]{2})/setprefs"
 		to="https://duckduckgo.com/settings" />
 
 	<!--	Completion urls look like this:
@@ -103,23 +103,23 @@
 http://clients2.google.co.jp/complete/search?hl=ja&client=hp&expIds=17259,24660,24729,24745&q=m&cp=1 HTTP/1.1\r\n
 
 		-->
-	<rule from="^http://clients\d\.google\.com/complete/search"
-		to="https://clients1.google.com/complete/search" />
+	<rule from="^http(?:s)?://clients\d\.google\.com/complete/search"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://clients\d\.google(\.com?\.[a-z]{2})/complete/search"
-		to="https://clients1.google.$1/complete/search" />
+	<rule from="^http(?:s)?://clients\d\.google(?:\.com?\.[a-z]{2})/complete/search"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://clients\d\.google\.([a-z]{2})/complete/search"
-		to="https://clients1.google.$1/complete/search" />
+	<rule from="^http(?:s)?://clients\d\.google\.(?:[a-z]{2})/complete/search"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://suggestqueries\.google\.com/complete/search"
-		to="https://clients1.google.com/complete/search" />
+	<rule from="^http(?:s)?://suggestqueries\.google\.com/complete/search"
+		to="https://duckduckgo.com/" />
 
-	<rule from="^http://(www\.)?google\.(com?\.)?([a-z]{2})/(?:webhp)?$"
-		to="https://$1google.$2$3/" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.(?:com?\.)?(?:[a-z]{2})/(?:webhp)?$"
+		to="https://duckduckgo.com/" />
 
 	<!--	If there are URL parameters, keep them.	-->
-	<rule from="^http://(www\.)?google\.(com?\.)?([a-z]{2})/(?:webhp)?\?"
-		to="https://$1google.$2$3/webhp?" />
+	<rule from="^http(?:s)?://(?:www\.)?google\.(?:com?\.)?(?:[a-z]{2})/(?:webhp)?\?"
+		to="https://duckduckgo.com/" />
 
 </ruleset>
