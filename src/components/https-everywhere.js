@@ -138,7 +138,7 @@ function xpcom_checkInterfaces(iid,iids,ex) {
   throw ex;
 }
 
-INCLUDE('ChannelReplacement', 'IOUtil', 'HTTPSRules', 'HTTPS', 'Thread', 'ApplicableList');
+INCLUDE('ChannelReplacement', 'IOUtil', 'HTTPSRules', 'HTTPS', 'Thread', 'ApplicableList', 'CORS');
 
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
@@ -445,6 +445,7 @@ HTTPSEverywhere.prototype = {
       }
       HTTPS.replaceChannel(lst, channel);
     } else if (topic == "http-on-examine-response") {
+         CORS.setCorsHeaders(channel);
          this.log(DBUG, "Got http-on-examine-response @ "+ (channel.URI ? channel.URI.spec : '') );
          HTTPS.handleSecureCookies(channel);
     } else if (topic == "http-on-examine-merged-response") {
