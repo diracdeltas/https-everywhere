@@ -235,15 +235,16 @@ function toggle_rule(rule_id) {
   var prefs = HTTPSEverywhere.get_prefs();
   var report = prefs.getBoolPref("report_disabled_rules");
   var tor_report = prefs.getBoolPref("report_disabled_rules_tor_only");
+  var report_comments = prefs.getBoolPref("report_comments");
 
   var aWin = CC['@mozilla.org/appshell/window-mediator;1']
 	  .getService(CI.nsIWindowMediator)
 	  .getMostRecentWindow('navigator:browser');
   var torbutton_avail = ssl_observatory.proxy_test_successful;
   HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);  
-  if (report && !rs.active) {
+  if (report && !rs.active && report_comments) {
     if (!tor_report || torbutton_avail) {
-      aWin.openDialog("chrome://https-everywhere/content/report-disable.xul", 
+      aWin.openDialog("chrome://https-everywhere/content/report-comments.xul", 
  		    rs.xmlName, "chrome,centerscreen",
 		    {xmlName: rs.xmlName, GITCommitID: GITID});
     }
