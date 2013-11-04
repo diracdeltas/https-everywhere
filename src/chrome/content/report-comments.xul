@@ -6,24 +6,23 @@
 <dialog id="https-everywhere-report-disable"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml"
-        title="&https-everywhere.prefs.view_xml_source;"
+        title="Report a HTTPS Everywhere bug"
         persist="screenX screenY width height"
         style="height:80%; resize:both;"
         buttons="accept,cancel"
-        height="400"
-	width="300"
+        height="600"
+	width="400"
 	buttonlabelaccept="&https-everywhere.report.send;"
 	buttonlabelcancel="&https-everywhere.report.dont_send;"
 	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
 	ondialogcancel="self.close()" >
 	
-    <script type="application/x-javascript" src="report-disable.js"/>
+    <script type="application/x-javascript" src="report-xul.js"/>
+    <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
 	    <command id="dont-ask-again" oncommand="httpsEverywhere.reportRule.onDisableCheck()" />
    	    <command id="tor-ask-again" oncommand="httpsEverywhere.reportRule.onTorCheck()" />
-	    <command id="send-addon-version" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_addon_version')" />
-   	    <command id="send-browser" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_browser')" />
-	    <command id="send-os" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_os')" />
+   	    <command id="send-os-and-browser" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_os_and_browser')" />
     </commandset>
 
     <dialogheader id="dialog-header" title="&https-everywhere.report.title;"/>
@@ -34,12 +33,8 @@
      <label id="sysinfo-label" control="sysinfo" value="Select what system info to report:" />
      <groupbox id="sysinfo">
       <vbox>
-	<checkbox id="send-addon-version-box" label="Report my version of HTTPS Everywhere" 
-         	 command="send-addon-version" style="font-size:1em"/>
-        <checkbox id="send-browser-box" label="Report my browser version"
-		 command="send-browser" style="font-size:1em"/>
-        <checkbox id="send-os-box" label="Report my operating system"
-		 command="send-os" style="font-size:1em"/>
+        <checkbox id="send-os-and-browser-box" label="Report my operating system and browser version."
+		 command="send-os-and-browser" style="font-size:1em"/>
       </vbox>
     </groupbox>
    <separator class="thin" />
