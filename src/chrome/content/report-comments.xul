@@ -11,11 +11,11 @@
         style="height:80%; resize:both;"
         buttons="accept,cancel"
         height="600"
-	width="400"
-	buttonlabelaccept="&https-everywhere.report.send;"
-	buttonlabelcancel="&https-everywhere.report.dont_send;"
-	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
-	ondialogcancel="self.close()" >
+    	width="400"
+    	buttonlabelaccept="&https-everywhere.report.send;"
+    	buttonlabelcancel="&https-everywhere.report.dont_send;"
+    	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
+    	ondialogcancel="self.close()" >
 	
     <script type="application/x-javascript" src="report-xul.js"/>
     <script type="application/x-javascript" src="report-xul-comments.js"/>
@@ -23,18 +23,25 @@
 	    <command id="dont-ask-again" oncommand="httpsEverywhere.reportRule.onDisableCheck()" />
    	    <command id="tor-ask-again" oncommand="httpsEverywhere.reportRule.onTorCheck()" />
    	    <command id="send-os-and-browser" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_os_and_browser')" />
+	    <command id="send-domain" oncommand="alert(1);" />
+   	    <command id="send-url" oncommand="alert(2);" />
+   	    <command id="send-extensions" oncommand="alert(3)" />
     </commandset>
 
     <dialogheader id="dialog-header" title="&https-everywhere.report.title;"/>
     <description>&https-everywhere.report.paragraph1;</description>
-    <separator class="thin" />
-    <description>&https-everywhere.report.paragraph2;</description>
     <separator class="thin" />
      <label id="sysinfo-label" control="sysinfo" value="Select what system info to report:" />
      <groupbox id="sysinfo">
       <vbox>
         <checkbox id="send-os-and-browser-box" label="Report my operating system and browser version."
 		 command="send-os-and-browser" style="font-size:1em"/>
+        <checkbox id="send-domain-box" label="Report my domain (ex: www.example.com)."
+		 command="send-domain" style="font-size:1em"/>
+        <checkbox id="send-url-box" label="Report my full URL (ex: www.example.com/?query=test&amp;id=123)."
+		 command="send-url" style="font-size:1em"/>
+        <checkbox id="send-extensions-box" label="Report which other extensions I have installed."
+		 command="send-extensions" style="font-size:1em"/>
       </vbox>
     </groupbox>
    <separator class="thin" />
@@ -44,9 +51,9 @@
     <groupbox>
       <vbox>
         <radiogroup id="report_group_disable">
-	  <radio id="dont-ask" label="&https-everywhere.report.dont_ask_again;" 
-         	 command="dont-ask-again" style="font-size:1.5em"/>
-          <radio id="tor-ask" label="&https-everywhere.report.only_ask_again_during_tor;"
+    	  <radio id="dont-ask" label="Disable bug reporting" 
+         	 command="dont-ask-again" style="font-size:1em"/>
+          <radio id="tor-ask" label="Disable bug reporting except during Tor"
 		 command="tor-ask-again" style="font-size:1em"/>
         </radiogroup>
         <box id="helper-text" hidden="true">
