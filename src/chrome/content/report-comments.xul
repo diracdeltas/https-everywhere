@@ -20,12 +20,13 @@
     <script type="application/x-javascript" src="report-xul.js"/>
     <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
-	    <command id="dont-ask-again" oncommand="httpsEverywhere.reportRule.onDisableCheck()" />
-   	    <command id="tor-ask-again" oncommand="httpsEverywhere.reportRule.onTorCheck()" />
-   	    <command id="send-os-and-browser" oncommand="httpsEverywhere.reportRule.toggleSysReport('report_os_and_browser')" />
-	    <command id="send-domain" oncommand="alert(1);" />
-   	    <command id="send-url" oncommand="alert(2);" />
-   	    <command id="send-extensions" oncommand="alert(3)" />
+	    <command id="dont-ask" oncommand="reportComments.onDisableCheck();" />
+   	    <command id="tor-ask" oncommand="reportComments.onTorCheck();" />
+   	    <command id="dont-ask-comments" oncommand="reportComments.onCommentsCheck();" />
+   	    <command id="send-os-and-browser" oncommand="reportComments.toggle('report_os_and_browser');" />
+	    <command id="send-domain" oncommand="reportComments.toggle('report_domain');" />
+   	    <command id="send-url" oncommand="reportComments.toggle('report_full_url');" />
+   	    <command id="send-extensions" oncommand="reportComments.toggle('report_extensions');" />
     </commandset>
 
     <dialogheader id="dialog-header" title="&https-everywhere.report.title;"/>
@@ -50,11 +51,13 @@
     <separator class="thin" />
     <groupbox>
         <vbox>
-            <radiogroup id="report_group_disable">
-    	        <radio id="dont-ask" label="Disable bug reporting" 
-         	           command="dont-ask-again" style="font-size:1em"/>
-                <radio id="tor-ask" label="Disable bug reporting except during Tor"
-		               command="tor-ask-again" style="font-size:1em"/>
+            <radiogroup id="report-radio-group">
+    	        <radio id="dont-ask-comments" label="Report this information without asking me for permission next time." 
+         	           command="dont-ask-comments" style="font-size:1em"/>
+    	        <radio id="dont-ask" label="Disable bug reporting." 
+         	           command="dont-ask" style="font-size:1em"/>
+                <radio id="tor-ask" label="Disable bug reporting except during Tor."
+		               command="tor-ask" style="font-size:1em"/>
             </radiogroup>
             <box id="helper-text" hidden="true">
 		        <description style="width: 300px">&https-everywhere.report.helper_text;</description>
