@@ -57,13 +57,18 @@ httpsEverywhere.reportRule = {
     if("arguments" in window && window.arguments.length > 0) {
       var rulename = window.arguments[0].xmlName;
       var id = window.arguments[0].GITCommitID; //GIT commit ID
+      var hostname = window.arguments[0].hostname; // parent window location
+      var href = window.arguments[0].href;
       var comment = document.getElementById("comment").value;
+      rr.outerLocation = {href: href, hostname: hostname};
     } else {
       // Should never happen
       throw 'Invalid window arguments.';
     }
     rr.submitReport(rulename,id,comment);
   },
+
+  outerLocation: null,
 
   getOSBrowser: function(p) {
     // https://developer.mozilla.org/en-US/docs/Code_snippets/Miscellaneous#System_info
@@ -80,9 +85,17 @@ httpsEverywhere.reportRule = {
     p.push("browser_version="+appInfo.version); // ex: 2.0.0.1
   },
 
-  getDomain: function(p) {},
+  getDomain: function(p) {
+    var rr = httpsEverywhere.reportRule;
+    var domain = rr.outerLocation.hostname;
+    p.push("domain="+domain);
+  },
 
-  getFullUrl: function(p) {},
+  getFullUrl: function(p) {
+    var rr = httpsEverywhere.reportRule;
+    var url = rr.outerLocation.href;
+    p.push("full_url="+url);
+  },
 
   getSysInfoSync: function(p) {
     var rr = httpsEverywhere.reportRule;

@@ -245,7 +245,8 @@ function toggle_rule(rule_id) {
     if (!tor_report || torbutton_avail) {
       aWin.openDialog("chrome://https-everywhere/content/report-disable.xul", 
  		    rs.xmlName, "chrome,centerscreen",
-		    {xmlName: rs.xmlName, GITCommitID: GITID});
+		    {xmlName: rs.xmlName, GITCommitID: GITID,
+         href: content.document.location.href, hostname: content.document.location.hostname});
     }
   }
   var domWin = content.document.defaultView.top;
