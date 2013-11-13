@@ -15,7 +15,7 @@ pref("extensions.https_everywhere.report_domain", true);
 pref("extensions.https_everywhere.report_full_url", false);
 
 // always show a popup asking for comments with bug reports?
-pref("extensions.https_everywhere.report_comments",false);
+pref("extensions.https_everywhere.report_comments", true);
 
 // have we shown a popup asking for bug report prefs the first time a user disables a rule?
 pref("extensions.https_everywhere.report_popup_shown", false);
