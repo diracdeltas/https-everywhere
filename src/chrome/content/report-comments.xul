@@ -7,11 +7,10 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml"
         title="Report a HTTPS Everywhere bug"
-        persist="screenX screenY width height"
         style="height:80%; resize:both;"
         buttons="accept,cancel"
         height="600"
-    	width="400"
+    	width="500"
     	buttonlabelaccept="&https-everywhere.report.send;"
     	buttonlabelcancel="&https-everywhere.report.dont_send;"
     	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
@@ -41,7 +40,7 @@
 		              command="send-domain" style="font-size:1em"/>
             <checkbox id="send-url-box" label="Report my full URL (ex: www.example.com/?query=test&amp;id=123)."
 		              command="send-url" style="font-size:1em"/>
-            <checkbox id="send-extensions-box" label="Report which other extensions I have installed."
+            <checkbox id="send-extensions-box" label="Report other browser addons I have enabled."
 		              command="send-extensions" style="font-size:1em"/>
         </vbox>
     </groupbox>
