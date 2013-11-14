@@ -1,71 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<!DOCTYPE overlay SYSTEM "chrome://https-everywhere/locale/ssl-observatory.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://https-everywhere/locale/https-everywhere.dtd">
 
-<dialog id="https-everywhere-prefs"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  xmlns:html="http://www.w3.org/1999/xhtml"
-  buttons="accept"
-  buttonlabelaccept="&ssl-observatory.prefs.done;"
-  title="&https-everywhere.report.bug_prefs_title;"
-  width="800"
-  height="768"
-  persist="screenX screenY width height"
-  onload="observatory_prefs_init(document)"
-  ondialogaccept="observatory_prefs_accept()">
-  <script type="application/x-javascript" src="observatory-xul.js" />
-  <vbox flex="1">
-    <spacer flex="1" />
-    <label>&https-everywhere.report.explanation;</label>
-    <!--<separator class="thin" />
-    <label>&ssl-observatory.prefs.explanation2;</label>
-    <separator class="thin" />-->
+<dialog id="https-everywhere-report-preferences"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        title="&https-everywhere.report.bug_prefs_title;"
+        style="height:80%; resize:both;"
+        buttons="accept,cancel"
+        height="600"
+    	width="500"
+    	buttonlabelaccept="&https-everywhere.report.done;"
+    	ondialogaccept="self.close()" >
+	
+    <script type="application/x-javascript" src="report-xul.js"/>
+    <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
-      <command id="toggle-enabled" oncommand="toggle_bugreports()" />
-      <command id="toggle-enabled" oncommand="toggle_bugreports()" />
+	    <command id="dont-ask" oncommand="reportComments.onDisableCheck();" />
+   	    <command id="tor-ask" oncommand="reportComments.onTorCheck();" />
+   	    <command id="dont-ask-comments" oncommand="reportComments.onEnableCheck();" />
+   	    <command id="ask-comments" oncommand="reportComments.onCommentsCheck();" />
+   	    <command id="send-os-and-browser" oncommand="reportComments.toggle('report_os_and_browser');" />
+	    <command id="send-domain" oncommand="reportComments.toggle('report_domain');" />
+   	    <command id="send-url" oncommand="reportComments.toggle('report_full_url');" />
+   	    <command id="send-extensions" oncommand="reportComments.toggle('report_extensions');" />
     </commandset>
-    <vbox>
-			<checkbox label="&https-everywhere.report.enable;" id="send-reports"
-								command="toggle-enabled" style="font-size:1.5em;"/>
-	<!--
-			<separator class="thin"/>
-				<radiogroup style="margin-left:3em;" id="ssl-obs-how">
-					<radio label="&ssl-observatory.prefs.anonymous;" 
-								 tooltiptext="&ssl-observatory.prefs.anonymous_tooltip;"
-								 alt_label="&ssl-observatory.prefs.anonymous_unavailable;"
-								 command="use-obs-anon" 
-								 class="ssl-obs-conf" id="ssl-obs-anon"/>
-					<radio label="&ssl-observatory.prefs.nonanon;" 
-								 tooltiptext="&ssl-observatory.prefs.nonanon_tooltip;"
-								 command="use-obs-nonanon"
-								 class="ssl-obs-conf" id="ssl-obs-nonanon"/>
-				</radiogroup>
-			<separator class="thin"/>-->
-			<!-- tooltips for bug report settings -->
-			<tooltip id="domain-tip" noautohide="true">
-				<label>&https-everywhere.report.domain_tooltip;</label>
-			</tooltip>
-			<tooltip id="addons-tip" noautohide="true">
-				<label>&https-everywhere.report.addons_tooltip;</label>
-			</tooltip>
 
-			<!-- bug report setting checkboxes -->
-
-			<checkbox label="&https-everywhere.report.domain;" id="send-domain"
-								tooltip="domain-tip" class="httpse-bugreport-conf"
-								command="toggle-send-domain"/>
-
-			<checkbox label="&https-everywhere.report.enable;" id="enable-bugreport"
-								class="httpse-bugreport-conf" command="toggle-reports"/>
-
-			<checkbox label="&https-everywhere.report.addons;" id="send-addons"
-								tooltip="addons-tip" class="httpse-bugreport-conf"
-								command="toggle-send-addons"/>
-
-    </vbox>
-
-    <spacer flex="5" />
-  </vbox>
+    <dialogheader id="dialog-header" title="&https-everywhere.report.bug_prefs_title;"/>
+    <description>&https-everywhere.report.preferences;</description>
+    <separator class="thin" />
+    <label id="sysinfo-label" control="sysinfo" value="Select what system info to report:" />
+    <groupbox id="sysinfo">
+        <vbox>
+            <checkbox id="send-os-and-browser-box" label="&https-everywhere.report.browser;"
+		              command="send-os-and-browser" style="font-size:1em"/>
+            <checkbox id="send-domain-box" label="&https-everywhere.report.domain;"
+		              command="send-domain" style="font-size:1em"/>
+            <checkbox id="send-url-box" label="&https-everywhere.report.url;"
+		              command="send-url" style="font-size:1em"/>
+            <checkbox id="send-extensions-box" label="&https-everywhere.report.addons;"
+		              command="send-extensions" style="font-size:1em" tooltiptext="&https-everywhere.report.addons_tooltip;"/>
+        </vbox>
+    </groupbox>
+    <separator class="thin" />
+    <groupbox>
+        <vbox>
+            <radiogroup id="report-radio-group">
+    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;" 
+         	           command="dont-ask-comments" style="font-size:1em"/>
+    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;" 
+         	           command="ask-comments" style="font-size:1em"/>
+    	        <radio id="dont-ask" label="&https-everywhere.report.disable;" 
+         	           command="dont-ask" style="font-size:1em"/>
+            </radiogroup>
+            <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
+		              command="tor-ask" style="font-size:1em"/>
+        </vbox>
+    </groupbox>
 </dialog>
-

@@ -10,5 +10,5 @@ function reportPopupYes() {
 }
 
 function reportPopupDetails() {
-  window.open("chrome://https-everywhere/content/report-comments.xul");
+  window.open("chrome://https-everywhere/content/report-preferences.xul");
 }

@@ -61,9 +61,6 @@
             </radiogroup>
             <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
 		              command="tor-ask" style="font-size:1em"/>
-            <box id="helper-text" hidden="true">
-		        <description style="width: 300px">&https-everywhere.report.helper_text;</description>
-            </box>
         </vbox>
     </groupbox>
 </dialog>

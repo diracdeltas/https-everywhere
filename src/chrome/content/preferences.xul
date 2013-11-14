@@ -67,28 +67,10 @@
     <vbox>
       <hbox>  
         <spacer flex="1" />
-	  <button label="&https-everywhere.report.advanced_show;" onclick="show_advanced_report()"
-	          id="show-advanced-button" />
-	  <button label="&https-everywhere.report.advanced_hide;" onclick="hide_advanced_report()"
-                  id="hide-advanced-button" hidden="true" />
+        <button label="&https-everywhere.report.caption;"
+                onclick="window.open('chrome://https-everywhere/content/report-preferences.xul')"
+	            id="show-advanced-button" />
         <spacer flex="1" />
       </hbox>	
-      <vbox id="advanced-opts" hidden="true">
-        <groupbox hidden="true" tooltip="report-tip">
-	  <caption label="&https-everywhere.report.caption;" />
-	  <description>&https-everywhere.report.preferences;"</description>
-	  <radiogroup id="report_group">
-	    <radio label="&https-everywhere.report.enable;" 
-	       	   id="enable_report"
-		   command="enable-report"/>
-	    <radio label="&https-everywhere.report.enable_tor;"
-		   id="enable_report_tor" 
-		   command="enable-report-tor"/>
-	    <radio label="&https-everywhere.report.disable;"
-		   id="disable_report"
-		   command="disable-report"/>
-          </radiogroup>
-        </groupbox>
-      </vbox>
     </vbox>
 </dialog>

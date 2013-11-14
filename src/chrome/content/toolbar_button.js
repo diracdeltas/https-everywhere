@@ -262,7 +262,7 @@ function toggle_rule(rule_id) {
     aWin.openDialog("chrome://https-everywhere/content/report-popup.xul", 
       rs.xmlName, "chrome,centerscreen", windowData);
     prefs.setBoolPref("report_popup_shown", true);
-    if (!tor_report || torbutton_avail) {
+    if (report && (!tor_report || torbutton_avail)) {
       rr.autoreport(windowData);
     }
   } else if (report && report_comments && !rs.active) {
