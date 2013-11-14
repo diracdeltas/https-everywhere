@@ -9,6 +9,8 @@ window.addEventListener("load", function load(event) {
 const CI = Components.interfaces;
 const CC = Components.classes;
 
+Components.utils.import("chrome://https-everywhere/content/report-xul.js");
+
 // LOG LEVELS ---
 VERB=1;
 DBUG=2;
@@ -32,6 +34,7 @@ if (!httpsEverywhere) { var httpsEverywhere = {}; }
  * UI for cases such as when the toolbar is disabled.
  *
  */
+
 httpsEverywhere.toolbarButton = {
 
   /**
@@ -229,10 +232,19 @@ function show_applicable_list(menupopup) {
 function toggle_rule(rule_id) {
   // toggle the rule state
   var rs = HTTPSEverywhere.https_rules.rulesetsByID[rule_id];
-  var GITID = rs.GITCommitID;
+  var rr = httpsEverywhere.reportRule;
+
+  var windowData = {xmlName: rs.xmlName,
+                    GITCommitID: rs.GITCommitID,
+                    href: content.document.location.href,
+                    hostname: content.document.location.hostname};
+
   rs.toggle();
 
   // prep bug reporting logic
+  // TODO: submit reports when a rule is re-enabled too, at least for 
+  // people who don't have commenting enabled
+
   var prefs = HTTPSEverywhere.get_prefs();
   var report = prefs.getBoolPref("report_disabled_rules");
   var tor_report = prefs.getBoolPref("report_disabled_rules_tor_only");
@@ -244,29 +256,29 @@ function toggle_rule(rule_id) {
 	  .getService(CI.nsIWindowMediator)
 	  .getMostRecentWindow('navigator:browser');
   
-  if (!report_popup_shown && !report && !rs.active) {
+  if (!report_popup_shown && !rs.active) {
+    // This is the user's first time disabling a rule
+    // Show them a popup asking them to tweak their preferences.
     aWin.openDialog("chrome://https-everywhere/content/report-popup.xul", 
-      rs.xmlName, "chrome,centerscreen",
-      {xmlName: rs.xmlName, GITCommitID: GITID});
+      rs.xmlName, "chrome,centerscreen", windowData);
     prefs.setBoolPref("report_popup_shown", true);
+    if (!tor_report || torbutton_avail) {
+      rr.autoreport(windowData);
+    }
   } else if (report_comments && !rs.active) {
+    // The user has chosen to get prompted for comments and prefs
+    // every time they disabled a rule.
     if (!tor_report || torbutton_avail) {
       aWin.openDialog("chrome://https-everywhere/content/report-comments.xul", 
- 		    rs.xmlName, "chrome,centerscreen",
-		    {xmlName: rs.xmlName, GITCommitID: GITID,
-         href: content.document.location.href, hostname: content.document.location.hostname});
+ 		    rs.xmlName, "chrome,centerscreen", windowData);
     } 
   } else if (report && !rs.active) {
+    // We've shown the popup, the user doesn't want to see the comment prompt,
+    // and they've turned on bug reporting.
     if (!tor_report || torbutton_avail) {
-      // #TODO: automatically submit a report
+      rr.autoreport(windowData);
     }
   }
-
-  var domWin = content.document.defaultView.top;
-  /*if (domWin instanceof CI.nsIDOMWindow) {
-    var alist = HTTPSEverywhere.getExpando(domWin,"applicable_rules", null);
-    if (alist) alist.empty();
-  }*/
   reload_window();
 }
 

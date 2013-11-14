@@ -14,6 +14,9 @@
 // global namespace pollution is avoided, although technically not required for
 // windows created by add-on.
 // See: https://developer.mozilla.org/en-US/docs/Security_best_practices_in_extensions#Code_wrapping
+
+var EXPORTED_SYMBOLS = ["httpsEverywhere"];
+
 VERB=1;
 DBUG=2;
 INFO=3;
@@ -66,6 +69,14 @@ httpsEverywhere.reportRule = {
       throw 'Invalid window arguments.';
     }
     rr.submitReport(rulename,id,comment);
+  },
+
+  autoreport: function(windowData) {
+    // Called from toolbar_button.js when someone has selected to report
+    // a rule without opening the comments dialog.
+    var rr = httpsEverywhere.reportRule;
+    rr.outerLocation = {href: windowData.href, hostname: windowData.hostname};
+    rr.submitReport(windowData.xmlName, windowData.id, windowData.comment);
   },
 
   outerLocation: null,

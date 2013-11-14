@@ -1,4 +1,4 @@
-pref("extensions.https_everywhere.LogLevel", 2); //verbose for debugging 
+pref("extensions.https_everywhere.LogLevel", 5); //verbose for debugging 
 pref("extensions.https_everywhere.globalEnabled",true);
 
 // report_disabled_rules must be true for any prompts to be displayed
