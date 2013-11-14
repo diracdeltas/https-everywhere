@@ -4,7 +4,7 @@ pref("extensions.https_everywhere.globalEnabled",true);
 // report_disabled_rules must be true for any prompts to be displayed
 // if report_disabled_rules_tor_only is true, only show prompts
 // when tor is enabled
-pref("extensions.https_everywhere.report_disabled_rules", true);
+pref("extensions.https_everywhere.report_disabled_rules", false);
 pref("extensions.https_everywhere.report_disabled_rules_tor_only", false);
 pref("extensions.https_everywhere.report_host", "zyan.scripts.mit.edu"); // change to httpse1.eff.org
 

@@ -232,24 +232,36 @@ function toggle_rule(rule_id) {
   var GITID = rs.GITCommitID;
   rs.toggle();
 
+  // prep bug reporting logic
   var prefs = HTTPSEverywhere.get_prefs();
   var report = prefs.getBoolPref("report_disabled_rules");
   var tor_report = prefs.getBoolPref("report_disabled_rules_tor_only");
   var report_comments = prefs.getBoolPref("report_comments");
-
+  var report_popup_shown = prefs.getBoolPref("report_popup_shown");
+  var torbutton_avail = ssl_observatory.proxy_test_successful;
+  HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);  
   var aWin = CC['@mozilla.org/appshell/window-mediator;1']
 	  .getService(CI.nsIWindowMediator)
 	  .getMostRecentWindow('navigator:browser');
-  var torbutton_avail = ssl_observatory.proxy_test_successful;
-  HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);  
-  if (report && !rs.active && report_comments) {
+  
+  if (!report_popup_shown && !report && !rs.active) {
+    aWin.openDialog("chrome://https-everywhere/content/report-popup.xul", 
+      rs.xmlName, "chrome,centerscreen",
+      {xmlName: rs.xmlName, GITCommitID: GITID});
+    prefs.setBoolPref("report_popup_shown", true);
+  } else if (report_comments && !rs.active) {
     if (!tor_report || torbutton_avail) {
       aWin.openDialog("chrome://https-everywhere/content/report-comments.xul", 
  		    rs.xmlName, "chrome,centerscreen",
 		    {xmlName: rs.xmlName, GITCommitID: GITID,
          href: content.document.location.href, hostname: content.document.location.hostname});
+    } 
+  } else if (report && !rs.active) {
+    if (!tor_report || torbutton_avail) {
+      // #TODO: automatically submit a report
     }
   }
+
   var domWin = content.document.defaultView.top;
   /*if (domWin instanceof CI.nsIDOMWindow) {
     var alist = HTTPSEverywhere.getExpando(domWin,"applicable_rules", null);
