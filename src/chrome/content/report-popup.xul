@@ -13,7 +13,7 @@
   buttonlabelextra1="&https-everywhere.report.popup_details;"
   ondialogaccept="reportPopupYes(); self.close();"
   ondialogcancel="self.close();"
-  ondialogextra1="reportPopupDetails(); self.close();" >
+  ondialogextra1="reportPopupDetails();" >
 
   <script type="application/x-javascript" src="report-popup.js"/>
   <description>&https-everywhere.report.popup_paragraph;</description>

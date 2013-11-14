@@ -6,7 +6,7 @@
 <dialog id="https-everywhere-report-disable"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml"
-        title="Report a HTTPS Everywhere bug"
+        title="&https-everywhere.report.title;"
         style="height:80%; resize:both;"
         buttons="accept,cancel"
         height="600"
@@ -21,7 +21,8 @@
     <commandset>
 	    <command id="dont-ask" oncommand="reportComments.onDisableCheck();" />
    	    <command id="tor-ask" oncommand="reportComments.onTorCheck();" />
-   	    <command id="dont-ask-comments" oncommand="reportComments.onCommentsCheck();" />
+   	    <command id="dont-ask-comments" oncommand="reportComments.onEnableCheck();" />
+   	    <command id="ask-comments" oncommand="reportComments.onCommentsCheck();" />
    	    <command id="send-os-and-browser" oncommand="reportComments.toggle('report_os_and_browser');" />
 	    <command id="send-domain" oncommand="reportComments.toggle('report_domain');" />
    	    <command id="send-url" oncommand="reportComments.toggle('report_full_url');" />
@@ -34,14 +35,14 @@
     <label id="sysinfo-label" control="sysinfo" value="Select what system info to report:" />
     <groupbox id="sysinfo">
         <vbox>
-            <checkbox id="send-os-and-browser-box" label="Report my operating system and browser version."
+            <checkbox id="send-os-and-browser-box" label="&https-everywhere.report.browser;"
 		              command="send-os-and-browser" style="font-size:1em"/>
-            <checkbox id="send-domain-box" label="Report my domain (ex: www.example.com)."
+            <checkbox id="send-domain-box" label="&https-everywhere.report.domain;"
 		              command="send-domain" style="font-size:1em"/>
-            <checkbox id="send-url-box" label="Report my full URL (ex: www.example.com/?query=test&amp;id=123)."
+            <checkbox id="send-url-box" label="&https-everywhere.report.url;"
 		              command="send-url" style="font-size:1em"/>
-            <checkbox id="send-extensions-box" label="Report other browser addons I have enabled."
-		              command="send-extensions" style="font-size:1em"/>
+            <checkbox id="send-extensions-box" label="&https-everywhere.report.addons;"
+		              command="send-extensions" style="font-size:1em" tooltiptext="&https-everywhere.report.addons_tooltip;"/>
         </vbox>
     </groupbox>
     <separator class="thin" />
@@ -51,13 +52,15 @@
     <groupbox>
         <vbox>
             <radiogroup id="report-radio-group">
-    	        <radio id="dont-ask-comments" label="Report this information without asking me for permission next time." 
+    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;" 
          	           command="dont-ask-comments" style="font-size:1em"/>
-    	        <radio id="dont-ask" label="Disable bug reporting." 
+    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;" 
+         	           command="ask-comments" style="font-size:1em"/>
+    	        <radio id="dont-ask" label="&https-everywhere.report.disable;" 
          	           command="dont-ask" style="font-size:1em"/>
-                <radio id="tor-ask" label="Disable bug reporting except during Tor."
-		               command="tor-ask" style="font-size:1em"/>
             </radiogroup>
+            <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
+		              command="tor-ask" style="font-size:1em"/>
             <box id="helper-text" hidden="true">
 		        <description style="width: 300px">&https-everywhere.report.helper_text;</description>
             </box>
