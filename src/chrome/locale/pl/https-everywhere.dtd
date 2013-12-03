@@ -40,3 +40,28 @@
 <!ENTITY https-everywhere.popup.paragraph3 "Pragnęlibyśmy abyś dalej używał naszej wersji rozwojowej i pomógł nam uczyć HTTPS Everywhere lepszym! Może się okazać, że jest trochę więcej błędów tu  i tam, które możesz zgłosić pod adres https-everywhere@eff.org. Wybacz proszę tę niedogodność. Dziękujemy za używanie HTTPS Everywhere.">
 <!ENTITY https-everywhere.popup.keep "Pozostań przy wersji rozwojowej">
 <!ENTITY https-everywhere.popup.revert "Pobierz najnowszą wersję stabilną">
+<!ENTITY https-everywhere.report.title "Report a problem with this rule: ">
+<!ENTITY https-everywhere.report.send "Send report">
+<!ENTITY https-everywhere.report.dont_send "Don't send">
+<!ENTITY https-everywhere.report.paragraph1 "You can help us improve HTTPS Everywhere by sending us an anonymous bug report when a ruleset causes a site to break. We'll review these reports regularly and try to fix these rulesets.">
+<!ENTITY https-everywhere.report.comment "Comment (optional): Why did you disable this rule?">
+<!ENTITY https-everywhere.report.preferences "When you disable a ruleset that is causing a site to break, we can create an anonymous bug report to help us fix that ruleset.">
+<!ENTITY https-everywhere.report.enable "Automatically submit bug reports when I disable a rule.">
+<!ENTITY https-everywhere.report.enable_tor "Enable bug reporting ONLY when Tor is active.">
+<!ENTITY https-everywhere.report.enable_comment "Ask me for my permission and comments before submitting a bug report.">
+<!ENTITY https-everywhere.report.disable "Disable bug reporting">
+<!ENTITY https-everywhere.report.caption "Automatic bug reporting preferences">
+<!ENTITY https-everywhere.report.bug_prefs_title "Bug Reporting For HTTPS Everywhere">
+<!ENTITY https-everywhere.report.domain "Send domain name (ex: example.com).">
+<!ENTITY https-everywhere.report.domain_tooltip "Sends the domain name of the page on which you disabled/enabled rulesets">
+<!ENTITY https-everywhere.report.browser "Report operating system and browser version.">
+<!ENTITY https-everywhere.report.addons "Report other add-ons I have enabled.">
+<!ENTITY https-everywhere.report.addons_tooltip "Addon information is valuable for debugging, but may be fingerprintable so we do not collect it by default">
+<!ENTITY https-everywhere.report.url "Send full URLs (ex: http://example.com/?query=test&amp;id=123)">
+<!ENTITY https-everywhere.report.done "Done">
+<!ENTITY https-everywhere.report.popup_title "HTTPS Everywhere Bug Reporting">
+<!ENTITY https-everywhere.report.popup_paragraph "You disabled an HTTPS Everywhere rule. Would you like to automatically submit bug reports?">
+<!ENTITY https-everywhere.report.popup_yes "Yes">
+<!ENTITY https-everywhere.report.popup_no "No">
+<!ENTITY https-everywhere.report.popup_ask "Ask for permission every time">
+<!ENTITY https-everywhere.report.popup_details "Details and Privacy Information">
