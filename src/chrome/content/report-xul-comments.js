@@ -15,17 +15,19 @@ var reportComments = {
 
   setRadio: function() {
     var pref = httpsEverywhere.reportRule.prefs;
-    var elem;
     var radiogroup = document.getElementById("report-radio-group");
     radiogroup.selectedItem.setAttribute("selected", "false");
     if (pref.getBoolPref("report_comments") && pref.getBoolPref("report_disabled_rules")) {
-      elem = "ask-comments";
+      document.getElementById("ask-comments").setAttribute("selected", true);
     } else if (pref.getBoolPref("report_disabled_rules")) {
-      elem = "dont-ask-comments";
+      document.getElementById("dont-ask-comments").setAttribute("selected", true);
     } else {
-      elem = "dont-ask";
+      // Person has disabled bug reporting but is seeing this dialog.
+      // Probably means they are seeing the popup for the first time
+      // and clicked on the "Details" button. Set to ask-comments for now.
+      document.getElementById("ask-comments").setAttribute("selected", true);
+      reportComments.onCommentsCheck();
     }
-    document.getElementById(elem).setAttribute("selected", true);
   },
  
   onEnableCheck: function() {

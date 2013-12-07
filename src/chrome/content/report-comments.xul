@@ -8,18 +8,19 @@
         xmlns:html="http://www.w3.org/1999/xhtml"
         title="&https-everywhere.report.title;"
         style="height:80%; resize:both;"
-        buttons="accept,cancel"
+        buttons="accept,cancel,extra1"
         height="600"
-    	width="500"
+        width="500"
+        buttonlabelextra1="&https-everywhere.report.disable;"
     	buttonlabelaccept="&https-everywhere.report.send;"
     	buttonlabelcancel="&https-everywhere.report.dont_send;"
     	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
-    	ondialogcancel="self.close()" >
+        ondialogcancel="self.close()" 
+        ondialogextra1="reportComments.onDisableCheck(); self.close()">
 	
     <script type="application/x-javascript" src="report-xul.js"/>
     <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
-	    <command id="dont-ask" oncommand="reportComments.onDisableCheck();" />
    	    <command id="tor-ask" oncommand="reportComments.onTorCheck();" />
    	    <command id="dont-ask-comments" oncommand="reportComments.onEnableCheck();" />
    	    <command id="ask-comments" oncommand="reportComments.onCommentsCheck();" />
@@ -56,8 +57,6 @@
          	           command="dont-ask-comments" style="font-size:1em"/>
     	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;" 
          	           command="ask-comments" style="font-size:1em"/>
-    	        <radio id="dont-ask" label="&https-everywhere.report.disable;" 
-         	           command="dont-ask" style="font-size:1em"/>
             </radiogroup>
             <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
 		              command="tor-ask" style="font-size:1em"/>
