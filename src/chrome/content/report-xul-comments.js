@@ -41,8 +41,7 @@ var reportComments = {
 
   onTorCheck: function() {
     var rr = httpsEverywhere.reportRule;
-    rr.prefs.setBoolPref("report_disabled_rules", true);
-    rr.prefs.setBoolPref("report_disabled_rules_tor_only", true);
+    reportComments.toggle("report_disabled_rules_tor_only");
   },
 
   onCommentsCheck: function() {

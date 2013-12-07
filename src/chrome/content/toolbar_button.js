@@ -262,9 +262,6 @@ function toggle_rule(rule_id) {
     aWin.openDialog("chrome://https-everywhere/content/report-popup.xul", 
       rs.xmlName, "chrome,centerscreen", windowData);
     prefs.setBoolPref("report_popup_shown", true);
-    if (report && (!tor_report || torbutton_avail)) {
-      rr.autoreport(windowData);
-    }
   } else if (report && report_comments && !rs.active) {
     // The user has chosen to get prompted for comments and prefs
     // every time they disabled a rule.
