@@ -102,12 +102,9 @@ function viewXMLSource() {
 
       //This *should* not violate TorButton's State Control, but someone should double check
       //this code just in case
-      var aWin = CC['@mozilla.org/appshell/window-mediator;1']
-      .getService(CI.nsIWindowMediator)
-      .getMostRecentWindow('navigator:browser');
-      aWin.openDialog("chrome://https-everywhere/content/fetch-source.xul",
-              rs.xmlName, "chrome,centerscreen",
-              {xmlName: rs.xmlName, GITCommitID: GITID} );
+      https_everywhere.dialog_opener("chrome://https-everywhere/content/fetch-source.xul",
+          rs.xmlName, "chrome,centerscreen",
+          {xmlName: rs.xmlName, GITCommitID: GITID});
     }
   }
 }

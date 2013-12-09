@@ -303,13 +303,6 @@ function toggleEnabledState(){
   httpsEverywhere.toolbarButton.changeIcon();
 }
 
-function open_in_tab(url) {
-  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                     .getService(Components.interfaces.nsIWindowMediator);
-  var recentWindow = wm.getMostRecentWindow("navigator:browser");
-  recentWindow.delayedOpenTab(url, null, null, null, null);
-}
-
 // hook event for showing hint
 HTTPSEverywhere.log(DBUG, 'Adding listener for toolbarButton init.');
 window.addEventListener("load", httpsEverywhere.toolbarButton.init, false);

@@ -57,10 +57,6 @@
       oncommand="HTTPSEverywhere.chrome_opener('chrome://https-everywhere/content/about.xul');" />
     <command id="https-everywhere-menuitem-observatory"
       oncommand="HTTPSEverywhere.chrome_opener('chrome://https-everywhere/content/observatory-preferences.xul', 'chrome,centerscreen,resizable=yes');" />
-    <command id="https-everywhere-menuitem-donate-eff"
-      oncommand="open_in_tab('https://www.eff.org/donate');" />
-    <command id="https-everywhere-menuitem-donate-tor"
-      oncommand="open_in_tab('https://www.torproject.org/donate');" />
   </commandset>
 </overlay>
 
