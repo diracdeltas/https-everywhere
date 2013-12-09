@@ -53,7 +53,7 @@ httpsEverywhere.toolbarButton = {
 
     var tb = httpsEverywhere.toolbarButton;
 
-    // run this here in case SSLObservatory() hasn't run 
+    // run this here in case SSLObservatory() hasn't run
     ssl_observatory.testProxySettings();
 
     // make sure icon is proper color during init
@@ -62,8 +62,8 @@ httpsEverywhere.toolbarButton = {
     // show ruleset counter when a tab is changed
     tb.updateRulesetsApplied();
     gBrowser.tabContainer.addEventListener(
-      'TabSelect', 
-      tb.updateRulesetsApplied, 
+      'TabSelect',
+      tb.updateRulesetsApplied,
       false
     );
 
@@ -83,8 +83,8 @@ httpsEverywhere.toolbarButton = {
 
     // decide whether to show toolbar hint
     let hintPref = "extensions.https_everywhere.toolbar_hint_shown";
-    if (!Services.prefs.getPrefType(hintPref) 
-        || !Services.prefs.getBoolPref(hintPref)) { 
+    if (!Services.prefs.getPrefType(hintPref)
+        || !Services.prefs.getBoolPref(hintPref)) {
       // only run once
       Services.prefs.setBoolPref(hintPref, true);
       gBrowser.addEventListener("DOMContentLoaded", tb.handleShowHint, true);
@@ -103,9 +103,9 @@ httpsEverywhere.toolbarButton = {
       var strings = document.getElementById('HttpsEverywhereStrings');
       var msg = strings.getString('https-everywhere.toolbar.hint');
       var hint = nBox.appendNotification(
-        msg, 
-        'https-everywhere', 
-        'chrome://https-everywhere/skin/https-everywhere-24.png', 
+        msg,
+        'https-everywhere',
+        'chrome://https-everywhere/skin/https-everywhere-24.png',
         nBox.PRIORITY_WARNING_MEDIUM,
 	[],
 	function(action) {
@@ -138,7 +138,7 @@ httpsEverywhere.toolbarButton = {
   updateRulesetsApplied: function() {
     var toolbarbutton = document.getElementById('https-everywhere-button');
     var enabled = HTTPSEverywhere.prefs.getBoolPref("globalEnabled");
-    if (!enabled) { 
+    if (!enabled) {
       toolbarbutton.setAttribute('rulesetsApplied', 0);
       return;
     }
@@ -165,7 +165,7 @@ httpsEverywhere.toolbarButton = {
 
     toolbarbutton.setAttribute('rulesetsApplied', counter);
     HTTPSEverywhere.log(INFO, 'Setting icon counter to: ' + counter);
-  } 
+  }
 };
 
 function https_everywhere_load() {
@@ -218,7 +218,7 @@ function show_applicable_list(menupopup) {
 
   var alist = HTTPSEverywhere.getExpando(domWin,"applicable_rules", null);
   var weird=false;
-  
+
   if (!alist) {
     // This case occurs for error pages and similar.  We need a dummy alist
     // because populate_menu lives in there.  Would be good to refactor this
@@ -242,7 +242,7 @@ function toggle_rule(rule_id) {
   rs.toggle();
 
   // prep bug reporting logic
-  // TODO: submit reports when a rule is re-enabled too, at least for 
+  // TODO: submit reports when a rule is re-enabled too, at least for
   // people who don't have commenting enabled
 
   var prefs = HTTPSEverywhere.get_prefs();
@@ -251,24 +251,21 @@ function toggle_rule(rule_id) {
   var report_comments = prefs.getBoolPref("report_comments");
   var report_popup_shown = prefs.getBoolPref("report_popup_shown");
   var torbutton_avail = ssl_observatory.proxy_test_successful;
-  HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);  
-  var aWin = CC['@mozilla.org/appshell/window-mediator;1']
-	  .getService(CI.nsIWindowMediator)
-	  .getMostRecentWindow('navigator:browser');
-  
+  HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);
+
   if (!report_popup_shown && !rs.active) {
     // This is the user's first time disabling a rule
     // Show them a popup asking them to tweak their preferences.
-    aWin.openDialog("chrome://https-everywhere/content/report-popup.xul", 
+    HTTPSEverywhere.dialog_opener("chrome://https-everywhere/content/report-popup.xul",
       rs.xmlName, "chrome,centerscreen", windowData);
     prefs.setBoolPref("report_popup_shown", true);
   } else if (report && report_comments && !rs.active) {
     // The user has chosen to get prompted for comments and prefs
     // every time they disabled a rule.
     if (!tor_report || torbutton_avail) {
-      aWin.openDialog("chrome://https-everywhere/content/report-comments.xul", 
+      HTTPSEverywhere.dialog_opener("chrome://https-everywhere/content/report-comments.xul",
  		    rs.xmlName, "chrome,centerscreen", windowData);
-    } 
+    }
   } else if (report && !rs.active) {
     // We've shown the popup, the user doesn't want to see the comment prompt,
     // and they've turned on bug reporting.
@@ -295,12 +292,12 @@ function reload_window() {
   }
   // This choice of flags comes from NoScript's quickReload function; not sure
   // if it's optimal
-  webNav.reload(webNav.LOAD_FLAGS_CHARSET_CHANGE);  
+  webNav.reload(webNav.LOAD_FLAGS_CHARSET_CHANGE);
 }
 
 function toggleEnabledState(){
 	HTTPSEverywhere.toggleEnabledState();
-	reload_window();	
+	reload_window();
 
   // Change icon depending on enabled state
   httpsEverywhere.toolbarButton.changeIcon();
@@ -320,7 +317,7 @@ window.addEventListener("load", httpsEverywhere.toolbarButton.init, false);
 function migratePreferences() {
   gBrowser.removeEventListener("DOMContentLoaded", migratePreferences, true);
   let prefs_version = HTTPSEverywhere.prefs.getIntPref("prefs_version");
-  
+
   // first migration loses saved prefs
   if(prefs_version == 0) {
     try {
@@ -339,9 +336,9 @@ function migratePreferences() {
         let strings = document.getElementById('HttpsEverywhereStrings');
         let msg = strings.getString('https-everywhere.migration.notification0');
         nBox.appendNotification(
-          msg, 
-          'https-everywhere-migration0', 
-          'chrome://https-everywhere/skin/https-everywhere-24.png', 
+          msg,
+          'https-everywhere-migration0',
+          'chrome://https-everywhere/skin/https-everywhere-24.png',
           nBox.PRIORITY_WARNING_MEDIUM
         );
       }

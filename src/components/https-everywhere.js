@@ -100,7 +100,7 @@ const WHERE_UNTRUSTED = 1;
 const WHERE_TRUSTED = 2;
 const ANYWHERE = 3;
 
-const N_COHORTS = 1000; 
+const N_COHORTS = 1000;
 
 const DUMMY_OBJ = {};
 DUMMY_OBJ.wrappedJSObject = DUMMY_OBJ;
@@ -434,7 +434,6 @@ HTTPSEverywhere.prototype = {
 
     if (topic == "http-on-modify-request") {
       if (!(channel instanceof CI.nsIHttpChannel)) return;
-      
       this.log(DBUG,"Got http-on-modify-request: "+channel.URI.spec);
       var lst = this.getApplicableListForChannel(channel); // null if no window is associated (ex: xhr)
       if (channel.URI.spec in https_everywhere_blacklist) {
@@ -687,26 +686,6 @@ HTTPSEverywhere.prototype = {
     }
   },
 
-  chrome_opener: function(uri, args) {
-    // we don't use window.open, because we need to work around TorButton's 
-    // state control
-    args = args || 'chrome,centerscreen';
-    return CC['@mozilla.org/appshell/window-mediator;1']
-      .getService(CI.nsIWindowMediator) 
-      .getMostRecentWindow('navigator:browser')
-      .open(uri,'', args );
-  },
-
-  tab_opener: function(uri) {
-    var gb = CC['@mozilla.org/appshell/window-mediator;1']
-      .getService(CI.nsIWindowMediator) 
-      .getMostRecentWindow('navigator:browser')
-      .gBrowser;
-    var tab = gb.addTab(uri);
-    gb.selectedTab = tab;
-    return tab;
-  },
-
   toggleEnabledState: function() {
     if(this.prefs.getBoolPref("globalEnabled")){    
         try{    
@@ -766,7 +745,47 @@ HTTPSEverywhere.prototype = {
             this.log(WARN, "Couldn't add observers: " + e);         
         }
     }
-  }
+  },
+
+  /**
+   * Helper functions for working with XUL
+   *
+   * TODO: put these in a separate file
+   */
+
+  chrome_opener: function(uri, args) {
+    // we don't use window.open, because we need to work around TorButton's
+    // state control
+    args = args || 'chrome,centerscreen';
+    return this.get_recent_window().open(uri, '', args);
+  },
+
+  dialog_opener: function(uri, title, args, data) {
+    args = args || 'chrome,centerscreen';
+    return this.get_recent_window().openDialog(uri, title, args, data);
+  },
+
+  tab_opener: function(uri) {
+    var gb = this.get_recent_window().gBrowser;
+    var tab = gb.addTab(uri);
+    gb.selectedTab = tab;
+    return tab;
+  },
+
+  get_recent_window: function() {
+    return CC['@mozilla.org/appshell/window-mediator;1']
+      .getService(CI.nsIWindowMediator)
+      .getMostRecentWindow('navigator:browser');
+  },
+
+  get_outer: function(win) {
+    return win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+      .getInterface(Components.interfaces.nsIWebNavigation)
+      .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+      .rootTreeItem
+      .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+      .getInterface(Components.interfaces.nsIDOMWindow);
+  },
 };
 
 var prefs = 0;

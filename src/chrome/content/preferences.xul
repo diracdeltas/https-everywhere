@@ -17,16 +17,11 @@
         style="height:80%; resize:both;"
         height="600"
         width="650"
-        onload="https_prefs_init(document)"
-        ondialogaccept="https_prefs_accept()">
-    
+        onload="https_prefs_init(document);"
+        ondialogaccept="https_prefs_accept();">
+
     <script type="application/x-javascript" src="preferences.js"/>
 
-    <commandset>
-      <command id="enable-report" oncommand="enable_report()" />   
-      <command id="disable-report" oncommand="disable_report()" />   
-      <command id="enable-report-tor" oncommand="enable_report_tor()" />   
-    </commandset> 
     <popupset>
         <menupopup id="tree-contextmenu" onpopupshowing="resetSelectedMenu()">
             <menuitem label="&https-everywhere.prefs.reset_default;" oncommand="resetSelected();" id="revert_menuitem"/>
@@ -34,13 +29,13 @@
             <menuitem label="&https-everywhere.prefs.view_xml_source;" oncommand="viewXMLSource();"/>
         </menupopup>
     </popupset>
-    
+
     <groupbox flex="1">
         <caption label="&https-everywhere.prefs.list_caption;"
                align="center"/>
         <vbox>
           &https-everywhere.prefs.search;: <textbox id="tree_search" oninput="treeView.search(this);" />
-	</vbox>
+	    </vbox>
         <tree id="sites_tree" editable="true" flex="1" context="tree-contextmenu">
           <treecols>
             <treecol id="enabled_col" type="checkbox" label="&https-everywhere.prefs.enabled;"
@@ -62,15 +57,6 @@
     	     style="color: blue; cursor:hand; text-decoration:underline;"
 	     onmouseover="event.target.style.cursor='pointer'"
 	     onmouseout="event.target.style.cursor='default'"
-   	     onclick="window_opener('https://eff.org/https-everywhere/rulesets')"/>.
-    </vbox>
-    <vbox>
-      <hbox>  
-        <spacer flex="1" />
-        <button label="&https-everywhere.report.caption;"
-                onclick="window.open('chrome://https-everywhere/content/report-preferences.xul')"
-	            id="show-advanced-button" />
-        <spacer flex="1" />
-      </hbox>	
+   	     onclick="window_opener('https://eff.org/https-everywhere/rulesets')"/>
     </vbox>
 </dialog>

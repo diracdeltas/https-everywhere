@@ -8,12 +8,12 @@
         xmlns:html="http://www.w3.org/1999/xhtml"
         title="&https-everywhere.report.bug_prefs_title;"
         style="height:80%; resize:both;"
-        buttons="accept,cancel"
+        buttons="accept"
         height="600"
     	width="500"
     	buttonlabelaccept="&https-everywhere.report.done;"
-    	ondialogaccept="self.close()" >
-	
+    	ondialogaccept="reportComments.closeOuter();" >
+
     <script type="application/x-javascript" src="report-xul.js"/>
     <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
@@ -47,13 +47,14 @@
     <groupbox>
         <vbox>
             <radiogroup id="report-radio-group">
-    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;" 
+    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;"
          	           command="dont-ask-comments" style="font-size:1em"/>
-    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;" 
+    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;"
          	           command="ask-comments" style="font-size:1em"/>
-    	        <radio id="dont-ask" label="&https-everywhere.report.disable;" 
+    	        <radio id="dont-ask" label="&https-everywhere.report.disable;"
          	           command="dont-ask" style="font-size:1em"/>
             </radiogroup>
+            <separator class="thin" />
             <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
 		              command="tor-ask" style="font-size:1em"/>
         </vbox>

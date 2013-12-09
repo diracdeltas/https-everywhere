@@ -15,6 +15,6 @@ function reportPopupYes() {
 }
 
 function reportPopupDetails() {
-  window.openDialog("chrome://https-everywhere/content/report-comments.xul",
+  HTTPSEverywhere.dialog_opener("chrome://https-everywhere/content/report-comments.xul",
       windowData.xmlName, "chrome,centerscreen", windowData);
 }

@@ -10,7 +10,6 @@ window.addEventListener("load", function() {
   rr.setFilenameText();
 }, false);
 
-
 var reportComments = {
 
   setRadio: function() {
@@ -29,7 +28,7 @@ var reportComments = {
       reportComments.onCommentsCheck();
     }
   },
- 
+
   onEnableCheck: function() {
     var rr = httpsEverywhere.reportRule;
     rr.prefs.setBoolPref("report_comments", false);
@@ -37,12 +36,10 @@ var reportComments = {
   },
 
   onDisableCheck: function() {
-    var rr = httpsEverywhere.reportRule;
-    rr.prefs.setBoolPref("report_disabled_rules", false);
+    httpsEverywhere.reportRule.prefs.setBoolPref("report_disabled_rules", false);
   },
 
   onTorCheck: function() {
-    var rr = httpsEverywhere.reportRule;
     reportComments.toggle("report_disabled_rules_tor_only");
   },
 
@@ -54,5 +51,14 @@ var reportComments = {
 
   toggle: function(setting) {
     httpsEverywhere.reportRule.toggleReportSetting(setting);
+  },
+
+  closeOuter: function() {
+    var outer = Components.classes["@eff.org/https-everywhere;1"]
+      .getService(Components.interfaces.nsISupports)
+      .wrappedJSObject.get_outer(window);
+    if (outer) {
+      outer.close();
+    }
   }
 };

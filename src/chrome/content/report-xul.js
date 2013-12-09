@@ -4,13 +4,13 @@
  * HTTPS Everywhere Firefox Extension: https://www.eff.org/https-everywhere/
  *
  * Licensed under the GPL v3+.
- * 
- * @copyright Copyright (C) 2010-2013 Mike Perry <mikeperry@fscked.org> 
+ *
+ * @copyright Copyright (C) 2010-2013 Mike Perry <mikeperry@fscked.org>
  *                                    Peter Eckersley <pde@eff.org>
  *                                    and many others.
  */
 
-// Define https everywhere variable object that will act as a namespace, so that 
+// Define https everywhere variable object that will act as a namespace, so that
 // global namespace pollution is avoided, although technically not required for
 // windows created by add-on.
 // See: https://developer.mozilla.org/en-US/docs/Security_best_practices_in_extensions#Code_wrapping
@@ -50,7 +50,7 @@ if (!httpsEverywhere) { var httpsEverywhere = {}; }
  */
 
 httpsEverywhere.reportRule = {
- 
+
   TIMEOUT: 60000,
   prefs: HTTPSEverywhere.get_prefs(),
 
@@ -136,7 +136,7 @@ httpsEverywhere.reportRule = {
   },
 
   getSysInfoAsync: function(p) {
-    // Get the HTTPS Everywhere version. 
+    // Get the HTTPS Everywhere version.
     // Note that getAddonByID is asynchronous.
     // Since we need to wait for it to return before the POST request can be submitted,
     // we give it finishRequest as a callback.
@@ -186,7 +186,7 @@ httpsEverywhere.reportRule = {
       rr.finishRequest(p);
     }
   },
-  
+
   finishRequest: function(p) {
     var rr = httpsEverywhere.reportRule;
     var params = p.join("&");
@@ -205,7 +205,7 @@ httpsEverywhere.reportRule = {
         }
       }
     };
-    req.send(params); 
+    req.send(params);
   },
 
   submitReport: function(rulename, commit_id, comment) {
@@ -215,7 +215,7 @@ httpsEverywhere.reportRule = {
     reqParams.push("commit_id="+commit_id);
     reqParams.push("comment="+comment);
     try {
-      rr.getSysInfoSync(reqParams); 
+      rr.getSysInfoSync(reqParams);
     } catch(e) {
       HTTPSEverywhere.log(WARN, 'Error getting system info: '+e);
     } finally {
@@ -252,7 +252,12 @@ httpsEverywhere.reportRule = {
   },
 
   setFilenameText: function() {
-    var rulename = window.arguments[0].xmlName;
+    if (window.arguments) {
+      var rulename = window.arguments[0].xmlName;
+    }
+    else {
+      return false;
+    }
     var dialog_header = document.getElementById("dialog-header");
     dialog_header.setAttribute("title", dialog_header.getAttribute("title")+rulename);
   },
@@ -275,4 +280,3 @@ httpsEverywhere.reportRule = {
     pref.setBoolPref(setting, !current);
   }
 };
-     

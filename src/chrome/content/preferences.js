@@ -99,14 +99,14 @@ function viewXMLSource() {
     sel.getRangeAt(t, start, end);
     for (var v = start.value; v <= end.value; v++){
       var rs = treeView.rules[v];
-      
+
       //This *should* not violate TorButton's State Control, but someone should double check
       //this code just in case
       var aWin = CC['@mozilla.org/appshell/window-mediator;1']
-      .getService(CI.nsIWindowMediator) 
+      .getService(CI.nsIWindowMediator)
       .getMostRecentWindow('navigator:browser');
       aWin.openDialog("chrome://https-everywhere/content/fetch-source.xul",
-              rs.xmlName, "chrome,centerscreen", 
+              rs.xmlName, "chrome,centerscreen",
               {xmlName: rs.xmlName, GITCommitID: GITID} );
     }
   }
@@ -149,7 +149,7 @@ function compareRules(a, b, col) {
 
 function https_prefs_init(doc) {
   var st = document.getElementById('sites_tree');
-  
+
   // GLOBAL VARIABLE!
   treeView = {
     rules: rulesets,
@@ -217,13 +217,13 @@ function https_prefs_init(doc) {
     cycleHeader: function (col) {
 	    var columnName;
     	var order = (col.element.getAttribute("sortDirection") === "ascending" ? -1 : 1);
-    	
+
     	var compare = function (a, b) {
     	  return compareRules(a, b, col) * order;
   	  };
     	rulesets.sort(compare);
     	this.rules.sort(compare);
-      
+
       var cols = st.getElementsByTagName("treecol");
       for (var i = 0; i < cols.length; i++) {
     		cols[i].removeAttribute("sortDirection");
@@ -238,60 +238,21 @@ function https_prefs_init(doc) {
 
 function window_opener(uri) {
   // we don't use window.open, because we need to work around TorButton's state control
-    if(typeof gBrowser == "undefined"){
-        var window = CC["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-        var browserWindow = window.getMostRecentWindow("navigator:browser").getBrowser();
-        var newTab = browserWindow.addTab(uri, null, null);
-        browserWindow.selectedTab = newTab;
-
-    }
-    else
-        gBrowser.selectedTab = gBrowser.addTab(uri);
+  if (typeof gBrowser == "undefined") {
+    https_everywhere.tab_opener(uri);
+  } else {
+    gBrowser.selectedTab = gBrowser.addTab(uri);
+  }
 }
 
 function https_prefs_accept() {
   // This is *horrid*, but
   // https://developer.mozilla.org/en/working_with_windows_in_chrome_code#Accessing_the_elements_of_the_top-level_document_from_a_child_window
-  var outer = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIWebNavigation)
-                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                   .rootTreeItem
-                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow); 
-
+  var outer = https_everywhere.get_outer(window);
   if (outer) outer.close();
   else alert("no outer space");
-
   return true;  // https://developer.mozilla.org/en/XUL/dialog#a-ondialogaccept
                 // also close things if there is no out meta prefs window
-}
-
-function enable_report() {
-  https_everywhere.prefs.setBoolPref("report_disabled_rules", true);
-  https_everywhere.prefs.setBoolPref("report_disabled_rules_tor_only", false);  
-}
-
-function enable_report_tor() {
-  https_everywhere.prefs.setBoolPref("report_disabled_rules", true);
-  https_everywhere.prefs.setBoolPref("report_disabled_rules_tor_only", true);  
-}
-
-function disable_report() {
-  https_everywhere.prefs.setBoolPref("report_disabled_rules", false);
-}
-
-function show_advanced_report() {
-  var adv_opts_box = document.getElementById("advanced-opts");
-  recursive_set(adv_opts_box, "hidden", "false");
-  document.getElementById("show-advanced-button").hidden = true;
-  document.getElementById("hide-advanced-button").hidden = false;
-}
-
-function hide_advanced_report() {
-  var adv_opts_box = document.getElementById("advanced-opts");
-  recursive_set(adv_opts_box, "hidden", "true");
-  document.getElementById("show-advanced-button").hidden = false;
-  document.getElementById("hide-advanced-button").hidden = true;
 }
 
 function recursive_set(node, attrib, value) {
@@ -301,20 +262,3 @@ function recursive_set(node, attrib, value) {
   for (var i=0; i<node.childNodes.length; i++)
     recursive_set(node.childNodes[i], attrib, value);
 }
-
-function set_radio() {
-    var elem;
-    var radiogroup = document.getElementById("report_group");
-    radiogroup.selectedItem.setAttribute("selected", "false");
-    if (!https_everywhere.prefs.getBoolPref("report_disabled_rules")) {
-      elem = 'disable_report';
-    } else if (https_everywhere.prefs.getBoolPref("report_disabled_rules_tor_only")) {
-      elem = 'enable_report_tor';
-    } else {
-      elem = 'enable_report';
-    }
-    var radio = document.getElementById(elem);
-    radio.setAttribute("selected", "true");
-}
-
-window.addEventListener("load", set_radio, false);

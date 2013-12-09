@@ -14,10 +14,10 @@
         buttonlabelextra1="&https-everywhere.report.disable;"
     	buttonlabelaccept="&https-everywhere.report.send;"
     	buttonlabelcancel="&https-everywhere.report.dont_send;"
-    	ondialogaccept="httpsEverywhere.reportRule.init(); self.close()"
-        ondialogcancel="self.close()" 
-        ondialogextra1="reportComments.onDisableCheck(); self.close()">
-	
+    	ondialogaccept="httpsEverywhere.reportRule.init(); self.close();"
+        ondialogcancel="self.close();"
+        ondialogextra1="reportComments.onDisableCheck(); self.close();">
+
     <script type="application/x-javascript" src="report-xul.js"/>
     <script type="application/x-javascript" src="report-xul-comments.js"/>
     <commandset>
@@ -53,11 +53,12 @@
     <groupbox>
         <vbox>
             <radiogroup id="report-radio-group">
-    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;" 
+    	        <radio id="dont-ask-comments" label="&https-everywhere.report.enable;"
          	           command="dont-ask-comments" style="font-size:1em"/>
-    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;" 
+    	        <radio id="ask-comments" label="&https-everywhere.report.enable_comment;"
          	           command="ask-comments" style="font-size:1em"/>
             </radiogroup>
+            <separator class="thin" />
             <checkbox id="tor-box" label="&https-everywhere.report.enable_tor;"
 		              command="tor-ask" style="font-size:1em"/>
         </vbox>
