@@ -9,6 +9,7 @@
         xmlns:html="http://www.w3.org/1999/xhtml"
         buttons="accept,extra1,extra2"
         buttonlabelextra1="&https-everywhere.prefs.disable_all;"
+    	buttonlabelaccept="&https-everywhere.report.done;"
         ondialogextra1="disable_all();"
         buttonlabelextra2="&https-everywhere.prefs.reset_defaults;"
         ondialogextra2="reset_defaults();"
