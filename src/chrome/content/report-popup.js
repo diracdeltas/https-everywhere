@@ -9,9 +9,11 @@ function reportPopupYes() {
   var prefs = HTTPSEverywhere.get_prefs();
   prefs.setBoolPref("report_disabled_rules", true);
   prefs.setBoolPref("report_comments", false);
-  if (!tor_report || torbutton_avail) {
+  var tor_report = prefs.getBoolPref("report_disabled_rules_tor_only");
+  if (!tor_report || windowData.torbutton_avail) {
     rr.autoreport(windowData);
   }
+  return true;
 }
 
 function reportPopupDetails() {

@@ -234,11 +234,6 @@ function toggle_rule(rule_id) {
   var rs = HTTPSEverywhere.https_rules.rulesetsByID[rule_id];
   var rr = httpsEverywhere.reportRule;
 
-  var windowData = {xmlName: rs.xmlName,
-                    GITCommitID: rs.GITCommitID,
-                    href: content.document.location.href,
-                    hostname: content.document.location.hostname};
-
   rs.toggle();
 
   // prep bug reporting logic
@@ -252,6 +247,11 @@ function toggle_rule(rule_id) {
   var report_popup_shown = prefs.getBoolPref("report_popup_shown");
   var torbutton_avail = ssl_observatory.proxy_test_successful;
   HTTPSEverywhere.log(INFO, 'Proxy test returned: '+torbutton_avail);
+  var windowData = {xmlName: rs.xmlName,
+                    GITCommitID: rs.GITCommitID,
+                    href: content.document.location.href,
+                    hostname: content.document.location.hostname,
+                    torbutton_avail: torbutton_avail};
 
   if (!report_popup_shown && !rs.active) {
     // This is the user's first time disabling a rule
