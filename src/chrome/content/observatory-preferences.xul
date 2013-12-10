@@ -9,13 +9,11 @@
   buttons="accept"
   buttonlabelaccept="&ssl-observatory.prefs.done;"
   title="&ssl-observatory.prefs.title;"
-  width="800"
-  height="768"
   persist="screenX screenY width height"
   onload="observatory_prefs_init(document)"
   ondialogaccept="observatory_prefs_accept()">
   <script type="application/x-javascript" src="observatory-xul.js" />
-  <vbox flex="1">
+  <vbox flex="1" style="overflow:auto">
     <spacer flex="1" />
     <hbox flex="1">
       <spacer flex="1" />

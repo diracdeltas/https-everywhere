@@ -9,8 +9,6 @@
         title="&https-everywhere.report.title;"
         style="height:80%; resize:both;"
         buttons="accept,cancel,extra1"
-        height="600"
-        width="500"
         buttonlabelextra1="&https-everywhere.report.disable;"
     	buttonlabelaccept="&https-everywhere.report.send;"
     	buttonlabelcancel="&https-everywhere.report.dont_send;"
@@ -31,6 +29,7 @@
     </commandset>
 
     <dialogheader id="dialog-header" title="&https-everywhere.report.title;"/>
+    <vbox style="overflow:auto">
     <description>&https-everywhere.report.paragraph1;</description>
     <separator class="thin" />
     <label id="sysinfo-label" control="sysinfo" value="Select what system info to report:" />
@@ -63,4 +62,5 @@
 		              command="tor-ask" style="font-size:1em"/>
         </vbox>
     </groupbox>
+    </vbox>
 </dialog>

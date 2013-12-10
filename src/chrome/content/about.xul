@@ -9,13 +9,11 @@
   xmlns:html="http://www.w3.org/1999/xhtml"
   buttons="accept"
   title="&https-everywhere.about.title;"
-  width="750"
-  height="540"
-  align="center">
+  buttonalign="center">
 
   <script type="application/x-javascript" 
            src="chrome://https-everywhere/content/preferences.js"/>
-  <vbox>
+  <vbox style="overflow:auto">
     <label style="text-align:center; font-weight:bold; font-size:22px;">&https-everywhere.about.ext_name;</label>
     <label style="text-align:center; font-size:18px; margin-bottom:10px;">&https-everywhere.about.ext_description;</label>
 

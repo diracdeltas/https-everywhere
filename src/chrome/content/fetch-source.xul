@@ -9,11 +9,8 @@
         title="&https-everywhere.prefs.view_xml_source;"
         persist="screenX screenY width height"
         style="height:80%; resize:both;"
-        buttons="accept"
-        height="600"
-        width="650">
-        
-    
+        buttons="accept">
+
     <script type="application/x-javascript" src="fetch-source.js"/>
     <box orient="horizontal">
         <label id="filename-label" value="&https-everywhere.source.filename;:"/>

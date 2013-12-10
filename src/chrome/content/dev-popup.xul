@@ -5,9 +5,9 @@
 <window id="dev-popup-dialog" 
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
   xmlns:html="http://www.w3.org/1999/xhtml" 
-  title="&https-everywhere.popup.title;" 
-  width="500" 
-  height="440" 
+  title="&https-everywhere.popup.title;"
+  width="500"
+  height="440"
   align="center"
   onload="document.getElementById('keep-on-dev').focus()"
   >
