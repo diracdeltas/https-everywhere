@@ -10,7 +10,6 @@
   align="center"
   onload="document.getElementById('ask-me-later').focus()"
   >
-  <vbox style="overflow:auto">
     <script type="application/x-javascript" src="observatory-xul.js" />
     <image src="chrome://https-everywhere/skin/ssl-observatory-messy.jpg" />
     <label style="padding:25px;">&ssl-observatory.popup.text;</label>
@@ -59,5 +58,4 @@
       <button label="&ssl-observatory.popup.later;" id="ask-me-later" tabindex="0" style="font-size:0.8em;" accesskey="l"
               oncommand="doCancel()"/>-
     </hbox>-->
-  </vbox>
 </window>
