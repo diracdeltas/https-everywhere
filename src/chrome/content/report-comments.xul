@@ -3,12 +3,14 @@
 
 <!DOCTYPE overlay SYSTEM "chrome://https-everywhere/locale/https-everywhere.dtd">
 
-<dialog id="https-everywhere-report-disable"
+<dialog id="https-everywhere-report-comments"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml"
         title="&https-everywhere.report.title;"
-        style="height:80%; resize:both;"
         buttons="accept,cancel,extra1"
+        persist="screenX screenY width height"
+        width="440"
+        height="500"
         buttonlabelextra1="&https-everywhere.report.disable;"
     	buttonlabelaccept="&https-everywhere.report.send;"
     	buttonlabelcancel="&https-everywhere.report.dont_send;"
