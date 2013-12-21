@@ -4,7 +4,7 @@
 
     <Description about="urn:mozilla:install-manifest">
         <em:name>HTTPS-Everywhere</em:name>
-        <em:creator>Mike Perry &amp; Peter Eckersley</em:creator>
+        <em:creator>Mike Perry, Peter Eckersley &amp; Yan Zhu</em:creator>
         <em:aboutURL>chrome://https-everywhere/content/about.xul</em:aboutURL>
         <em:id>https-everywhere@eff.org</em:id>
         <em:description>Encrypt the Web! Automatically use HTTPS security on many sites.</em:description>
@@ -63,6 +63,5 @@
             <em:maxVersion>99.*</em:maxVersion>
           </Description>
         </em:targetApplication>
-
     </Description>
 </RDF>
