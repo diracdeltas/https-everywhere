@@ -182,6 +182,15 @@ HTTPSEverywhere.prototype = {
   classID:          SERVICE_ID,
   contractID:       SERVICE_CTRID,
 
+  bootstrapInit: function() {
+    // Register us as a bootstrapped component
+    var registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
+    registrar.registerFactory(this.classID, this.classDescription, this.contractID, this);
+    onShutdown.add(function() {
+      registrar.unregisterFactory(this.classID, this);
+    })
+  },
+
   _xpcom_factory: {
     createInstance: function (outer, iid) {
       if (outer != null)
@@ -601,4 +610,5 @@ if (XPCOMUtils.generateNSGetFactory)
 else
     var NSGetModule = XPCOMUtils.generateNSGetModule([HTTPSEverywhere]);
 
+HTTPSEverywhere.prototype.bootstrapInit();
 /* vim: set tabstop=4 expandtab: */
