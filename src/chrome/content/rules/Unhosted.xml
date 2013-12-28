@@ -1,9 +1,0 @@
-<ruleset name="Unhosted" default_off="broken">
-
-	<target host="unhosted.org"/>
-	<target host="www.unhosted.org"/>
-
-	<rule from="^http://(?:www\.)?unhosted\.org/"
-		to="https://unhosted.org/"/>
-
-</ruleset>

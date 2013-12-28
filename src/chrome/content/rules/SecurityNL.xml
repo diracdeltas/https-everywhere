@@ -1,6 +1,0 @@
-<ruleset name="Security.NL">
-  <target host="security.nl" />
-  <target host="www.security.nl" />
-
-  <rule from="^http://(?:www\.)?security\.nl/" to="https://secure.security.nl/"/>
-</ruleset>

@@ -1,6 +1,0 @@
-<ruleset name="38.de" platform="mixedcontent">
-  <target host="www.38.de" />
-  <target host="38.de" />
-
-  <rule from="^http://(?:www\.)?38\.de/" to="https://www.38.de/"/>
-</ruleset>

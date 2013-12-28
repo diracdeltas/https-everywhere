@@ -1,8 +1,0 @@
-<!-- Karlstad university -->
-<ruleset name="KAU.se" platform="mixedcontent">
-	<target host="www.kau.se" />
-	<target host="kau.se" />
-	<rule from="^http://kau\.se/" to="https://www.kau.se/"/>
-	<rule from="^http://www\.kau\.se/" to="https://www.kau.se/"/>
-</ruleset>
-

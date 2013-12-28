@@ -1,7 +1,0 @@
-<ruleset name="Adtechus.com (partial)" platform="mixedcontent">
-	<target host="adserver.adtechus.com" />
-
-	<securecookie host="(^|\.)adserver\.adtechus\.com$" name=".+" />
-
-	<rule from="^http://adserver\.adtechus\.com/" to="https://adserver.adtechus.com/" />
-</ruleset>

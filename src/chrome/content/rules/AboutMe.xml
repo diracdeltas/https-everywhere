@@ -1,8 +1,0 @@
-<ruleset name="AboutMe (broken)" default_off="Reported broken">
-  <target host="about.me"/>
-  <target host="www.about.me"/>
-
-  <securecookie host="^(.*\.)?about.me$" name=".*" />
-
-  <rule from="^http://(?:www\.)?about\.me/" to="https://www.about.me/"/>
-</ruleset>

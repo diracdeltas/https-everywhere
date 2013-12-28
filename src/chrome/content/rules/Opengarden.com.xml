@@ -1,6 +1,0 @@
-<ruleset name="Opengarden.com">
-  <target host="opengarden.com" />
-  <target host="www.opengarden.com" />
-
-  <rule from="^http://(www\.)?opengarden\.com/" to="https://opengarden.com/" />
-</ruleset>

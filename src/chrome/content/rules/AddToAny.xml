@@ -1,6 +1,0 @@
-<ruleset name="AddToAny">
-  <target host="static.addtoany.com" />
-
-  <rule from="^http://static\.addtoany\.com/"
-          to="https://static.addtoany.com/"/>
-</ruleset>

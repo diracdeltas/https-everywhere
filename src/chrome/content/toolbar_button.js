@@ -1,4 +1,10 @@
 window.addEventListener("load", https_everywhere_load, true);
+window.addEventListener("load", function load(event) {
+  // need to wrap migratePreferences in another callback so that notification
+  // always displays on browser restart
+  window.removeEventListener("load", load, false);
+  gBrowser.addEventListener("DOMContentLoaded", migratePreferences, true);
+}, false);
 
 const CI = Components.interfaces;
 const CC = Components.classes;
@@ -152,7 +158,6 @@ httpsEverywhere.toolbarButton = {
   } 
 };
 
-
 function https_everywhere_load() {
   window.removeEventListener('load', https_everywhere_load, true);
   // on first run, put the context menu in the addons bar
@@ -194,6 +199,8 @@ function stitch_context_menu2() {
   }
 }
 
+var rulesetTestsMenuItem = null;
+
 function show_applicable_list(menupopup) {
   var domWin = content.document.defaultView.top;
   if (!(domWin instanceof CI.nsIDOMWindow)) {
@@ -212,12 +219,33 @@ function show_applicable_list(menupopup) {
     weird = true;
   }
   alist.populate_menu(document, menupopup, weird);
+
+  // should we also show the ruleset tests menu item?
+  if(HTTPSEverywhere.prefs.getBoolPref("show_ruleset_tests")) {
+
+    if(!rulesetTestsMenuItem) {
+      let strings = document.getElementById('HttpsEverywhereStrings');
+      let label = strings.getString('https-everywhere.menu.ruleset-tests');
+
+      rulesetTestsMenuItem = this.document.createElement('menuitem');
+      rulesetTestsMenuItem.setAttribute('command', 'https-everywhere-menuitem-ruleset-tests');
+      rulesetTestsMenuItem.setAttribute('label', label);
+    }
+
+    if(!menupopup.contains(rulesetTestsMenuItem)) 
+      menupopup.appendChild(rulesetTestsMenuItem);
+  }
+  
 }
 
 function toggle_rule(rule_id) {
   // toggle the rule state
   HTTPSEverywhere.https_rules.rulesetsByID[rule_id].toggle();
   var domWin = content.document.defaultView.top;
+  /*if (domWin instanceof CI.nsIDOMWindow) {
+    var alist = HTTPSEverywhere.getExpando(domWin,"applicable_rules", null);
+    if (alist) alist.empty();
+  }*/
   reload_window();
 }
 
@@ -241,8 +269,8 @@ function reload_window() {
 }
 
 function toggleEnabledState(){
-  HTTPSEverywhere.toggleEnabledState();
-  reload_window();	
+	HTTPSEverywhere.toggleEnabledState();
+	reload_window();	
 
   // Change icon depending on enabled state
   httpsEverywhere.toolbarButton.changeIcon();
@@ -258,4 +286,40 @@ function open_in_tab(url) {
 // hook event for showing hint
 HTTPSEverywhere.log(DBUG, 'Adding listener for toolbarButton init.');
 window.addEventListener("load", httpsEverywhere.toolbarButton.init, false);
+
+function migratePreferences() {
+  gBrowser.removeEventListener("DOMContentLoaded", migratePreferences, true);
+  let prefs_version = HTTPSEverywhere.prefs.getIntPref("prefs_version");
+  
+  // first migration loses saved prefs
+  if(prefs_version == 0) {
+    try {
+      // upgrades will have old rules as preferences, such as the EFF rule
+      let upgrade = false;
+      let childList = HTTPSEverywhere.prefs.getChildList("", {});
+      for(let i=0; i<childList.length; i++) {
+        if(childList[i] == 'EFF') {
+          upgrade = true;
+          break;
+        }
+      }
+
+      if(upgrade) {
+        let nBox = gBrowser.getNotificationBox();
+        let strings = document.getElementById('HttpsEverywhereStrings');
+        let msg = strings.getString('https-everywhere.migration.notification0');
+        nBox.appendNotification(
+          msg, 
+          'https-everywhere-migration0', 
+          'chrome://https-everywhere/skin/https-everywhere-24.png', 
+          nBox.PRIORITY_WARNING_MEDIUM
+        );
+      }
+    } catch(e) {
+      HTTPSEverywhere.log(WARN, "Migration from prefs_version 0 error: "+e);
+    }
+
+    HTTPSEverywhere.prefs.setIntPref("prefs_version", prefs_version+1);
+  }
+}
 

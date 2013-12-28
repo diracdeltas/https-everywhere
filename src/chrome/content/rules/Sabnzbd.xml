@@ -1,5 +1,0 @@
-<ruleset name="Sabnzbd Forum">
-  <target host="forums.sabnzbd.org" />
-
-  <rule from="^http://forums\.sabnzbd\.org/" to="https://forums.sabnzbd.org/"/>
-</ruleset>

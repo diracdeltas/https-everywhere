@@ -1,8 +1,0 @@
-<ruleset name="OpenVPN">
-  <target host="openvpn.net" />
-  <target host="www.openvpn.net" />
-
-  <securecookie host="^(www\.)?openvpn\.net$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?openvpn\.net/" to="https://www.openvpn.net/"/>
-</ruleset>

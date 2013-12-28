@@ -1,6 +1,0 @@
-<ruleset name="Aaai.org" platform="mixedcontent">
-  <target host="aaai.org" />
-  <target host="www.aaai.org" />
-
-  <rule from="^http://(?:www\.)?aaai\.org/" to="https://www.aaai.org/" />
-</ruleset>

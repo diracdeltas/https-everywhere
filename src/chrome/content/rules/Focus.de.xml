@@ -1,6 +1,0 @@
-<ruleset name="Focus.de">
- <target host="www.focus.de" />
- <target host="focus.de" />
-
- <rule from="^http://(www\.)?focus\.de/" to="https://www.focus.de/"/>
-</ruleset>

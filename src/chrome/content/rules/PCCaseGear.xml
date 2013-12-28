@@ -1,8 +1,0 @@
-<ruleset name="PCCaseGear" platform="mixedcontent">
-  <target host="pccasegear.com" />
-  <target host="www.pccasegear.com" />
-  <target host="pccasegear.com.au" />
-  <target host="www.pccasegear.com.au" />
-
-  <rule from="^https?://(?:www\.)?pccasegear\.com(?:\.au)?/" to="https://www.pccasegear.com/"/>
-</ruleset>

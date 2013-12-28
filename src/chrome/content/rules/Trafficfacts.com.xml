@@ -1,5 +1,0 @@
-<ruleset name="Trafficfacts.com">
-	<target host="rt.trafficfacts.com" />
-
-	<rule from="^http://rt\.trafficfacts\.com/" to="https://rt.trafficfacts.com/" />
-</ruleset>

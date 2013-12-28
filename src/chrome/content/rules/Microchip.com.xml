@@ -1,6 +1,0 @@
-<ruleset name="Microchip (broken)" default_off="only homepage works">
-  <target host="www.microchip.com" />
-  <target host="microchip.com" />
-
-  <rule from="^http://(?:www\.)?microchip\.com/" to="https://www.microchip.com/"/>
-</ruleset>

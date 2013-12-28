@@ -1,8 +1,0 @@
-<ruleset name="PrivateWifi" platform="mixedcontent">
-  <target host="privatewifi.com" />
-  <target host="www.privatewifi.com" />
-
-  <securecookie host="^(.+\.)?privatewifi\.com$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?privatewifi\.com/" to="https://www.privatewifi.com/"/>
-</ruleset>

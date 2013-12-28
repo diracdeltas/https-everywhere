@@ -1,8 +1,0 @@
-<ruleset name="Shoutback Concepts (partial)">
-
-	<target host="static.shoutback.com"/>
-
-	<rule from="^http://static\.shoutback\.com/"
-		to="https://static.shoutback.com/"/>
-
-</ruleset>

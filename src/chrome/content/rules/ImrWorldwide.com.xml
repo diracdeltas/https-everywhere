@@ -1,7 +1,0 @@
-<ruleset name="Imrworldwide.com">
-	<target host="*.imrworldwide.com" />
-
-	<securecookie host="^\.imrworldwide\.com$" name=".*" />
-
-	<rule from="^http://secure-(\w\w)\.imrworldwide\.com/" to="https://secure-$1.imrworldwide.com/" />
-</ruleset>

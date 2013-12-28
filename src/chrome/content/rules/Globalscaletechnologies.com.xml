@@ -1,6 +1,0 @@
-<ruleset name="Global Scale Technologies">
-  <target host="globalscaletechnologies.com" />
-  <target host="www.globalscaletechnologies.com" />
-
-  <rule from="^http://(?:www\.)?globalscaletechnologies\.com/" to="https://www.globalscaletechnologies.com/" />
-</ruleset>

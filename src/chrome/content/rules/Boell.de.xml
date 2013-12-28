@@ -1,4 +1,0 @@
-<ruleset name="Boell.de">
-	<target host="groupwise.boell.de" />
-	<rule from="^http://groupwise\.boell\.de/" to="https://groupwise.boell.de/" />
-</ruleset>

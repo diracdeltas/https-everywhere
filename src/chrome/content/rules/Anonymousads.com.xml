@@ -1,6 +1,0 @@
-<ruleset name="Anonymousads.com">
-  <target host="anonymousads.com" />
-  <target host="www.anonymousads.com" />
-
-  <rule from="^http://(www\.)?anonymousads\.com/" to="https://anonymousads.com/" />
-</ruleset>

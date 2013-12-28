@@ -1,7 +1,0 @@
-<ruleset name="LWN" platform="mixedcontent">
-  <target host="lwn.net" />
-  <target host="www.lwn.net" />
-
-  <rule from="^http://(?:www\.)?lwn\.net/" to="https://lwn.net/"/>
-</ruleset>
-

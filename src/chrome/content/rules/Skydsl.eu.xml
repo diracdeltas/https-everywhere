@@ -1,7 +1,0 @@
-<ruleset name="Skydsl.eu">
-  <target host="skydsl.eu" />
-  <target host="*.skydsl.eu" />
-
-  <rule from="^http://skydsl\.eu/" to="https://skydsl.eu/" />
-  <rule from="^http://([^/:@\.]+)\.skydsl\.eu/" to="https://$1.skydsl.eu/" />
-</ruleset>

@@ -1,4 +1,4 @@
-content https-everywhere chrome/content/
+content https-everywhere lib/
 
 locale https-everywhere en chrome/locale/en/
 locale https-everywhere lt chrome/locale/lt/

@@ -1,7 +1,0 @@
-<ruleset name="Konami.com">
-	<target host="konami.com" />
-	<target host="www.konami.com" />
-	<rule from="^http://konami\.com/" to="https://www.konami.com/"/>
-	<rule from="^http://www\.konami\.com/" to="https://www.konami.com/"/>
-</ruleset>
-

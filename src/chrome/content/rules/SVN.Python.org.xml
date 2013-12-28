@@ -1,4 +1,0 @@
-<ruleset name="Python.org SVN" platform="cacert">
-  <target host="svn.python.org"/>
-  <rule from="^http://svn\.python\.org/" to="https://svn.python.org/"/>
-</ruleset>

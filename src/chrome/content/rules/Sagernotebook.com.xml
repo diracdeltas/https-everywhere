@@ -1,6 +1,0 @@
-<ruleset name="Sagernotebook.com">
-  <target host="sagernotebook.com" />
-  <target host="www.sagernotebook.com" />
-
-  <rule from="^http://(?:www\.)?sagernotebook\.com/" to="https://www.sagernotebook.com/" />
-</ruleset>

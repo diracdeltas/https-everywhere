@@ -1,9 +1,0 @@
-<ruleset name="FastDomain">
-
-	<target host="fastdomain.com" />
-	<target host="*.fastdomain.com" />
-
-	<rule from="^http://(partner\.|webmail\.|www\.)?fastdomain\.com/"
-		to="https://$1fastdomain.com/" />
-
-</ruleset>

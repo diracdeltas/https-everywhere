@@ -1,7 +1,0 @@
-<ruleset name="Actel.com">
-  <target host="actel.com" />
-  <target host="www.actel.com" />
-
-  <rule from="^http://actel\.com/" to="https://www.actel.com/" />
-  <rule from="^http://www\.actel\.com/" to="https://www.actel.com/" />
-</ruleset>

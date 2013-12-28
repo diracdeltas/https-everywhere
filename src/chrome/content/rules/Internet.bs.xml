@@ -1,6 +1,0 @@
-<ruleset name="Internet.bs">
-  <target host="internetbs.net" />
-  <target host="www.internetbs.net" />
-
-  <rule from="^http://(www\.)?internetbs\.net/" to="https://internetbs.net/" />
-</ruleset>

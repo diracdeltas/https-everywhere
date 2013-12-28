@@ -1,7 +1,0 @@
-<ruleset name="Comparis.ch" platform="mixedcontent">
-        <target host="comparis.ch" />
-        <target host="www.comparis.ch" />
-        <securecookie host="^(.*\.)?comparis\.ch$" name=".*" />
-
-        <rule from="^http://(?:www\.)?comparis\.ch/" to="https://www.comparis.ch/"/>
-</ruleset>

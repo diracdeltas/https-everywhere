@@ -1,8 +1,0 @@
-<ruleset name="LinuxQuestions.org" platform="mixedcontent">
-  <target host="linuxquestions.org" />
-  <target host="www.linuxquestions.org" />
-
-  <securecookie host="^(.+\.)?linuxquestions\.org$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?linuxquestions\.org/" to="https://www.linuxquestions.org/"/>
-</ruleset>

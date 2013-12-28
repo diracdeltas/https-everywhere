@@ -1,9 +1,0 @@
-<ruleset name="Avoin Ministerio">
-  <target host="www.avoinministerio.fi" />
-  <target host="avoinministerio.fi" />
-
-  <rule from="^http://(www\.)?avoinministerio\.fi/" to="https://www.avoinministerio.fi/"/>
-  <rule from="^https://avoinministerio\.fi/" to="https://www.avoinministerio.fi/"/>
-
-  <securecookie host="^(www)\.avoiministerio\.fi" name=".*" />
-</ruleset>

@@ -1,6 +1,0 @@
-<ruleset name="City of Portland, OR">
-  <target host="www.portlandonline.com"/>
-  <target host="portlandonline.com"/>
-
-  <rule from="^http://(?:www\.)?portlandonline\.com/" to="https://www.portlandonline.com/"/>
-</ruleset>

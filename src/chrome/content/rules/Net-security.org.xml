@@ -1,7 +1,0 @@
-<ruleset name="net-security.org" platform="mixedcontent">
-	<target host="www.net-security.org" />
-	<target host="net-security.org" />
-	<rule from="^http://www\.net-security\.org/" to="https://www.net-security.org/"/>
-	<rule from="^http://net-security\.org/" to="https://net-security.org/"/>
-</ruleset>
-

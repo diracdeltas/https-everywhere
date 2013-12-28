@@ -1,8 +1,0 @@
-<ruleset name="ZTunnel" platform="mixedcontent">
-  <target host="ztunnel.com" />
-  <target host="www.ztunnel.com" />
-
-  <securecookie host="^(.+\.)?ztunnel\.com$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?ztunnel\.com/" to="https://ztunnel.com/"/>
-</ruleset>

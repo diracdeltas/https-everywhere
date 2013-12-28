@@ -1,5 +1,0 @@
-<ruleset name="Unreal Development Kit">
-	<target host="udk.com" />
-	<target host="www.udk.com" />
-	<rule from="^http://(?:www\.)?udk\.com/" to="https://udk.com/"/>
-</ruleset>

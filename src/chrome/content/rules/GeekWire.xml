@@ -1,8 +1,0 @@
-<ruleset name="GeekWire (partial)">
-
-	<target host="cdn.geekwire.com"/>
-
-	<rule from="^http://cdn\.geekwire\.com/"
-		to="https://s3.amazonaws.com/geekwire/"/>
-
-</ruleset>

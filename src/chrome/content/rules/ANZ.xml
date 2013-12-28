@@ -1,8 +1,0 @@
-<ruleset name="ANZ" platform="mixedcontent">
-  <target host="anz.com" />
-  <target host="www.anz.com" />
-
-  <securecookie host="^(.+\.)?anz\.com$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?anz\.com/" to="https://www.anz.com/"/>
-</ruleset>

@@ -1,6 +1,0 @@
-<ruleset name="OpenSC Project">
-  <target host="www.opensc-project.org"/>
-  <target host="opensc-project.org"/>
-
-  <rule from="^http://(www\.)?opensc-project\.org/" to="https://www.opensc-project.org/"/>
-</ruleset>

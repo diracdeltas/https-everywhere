@@ -63,7 +63,7 @@ if [ "$1" != "--fast" ] ; then
     VALIDATE=./trivial-validate
   fi
 
-  if $VALIDATE src/chrome/content/rules >&2
+  if $VALIDATE src/lib/rules >&2
   then
     echo Validation of included rulesets completed. >&2
     echo >&2
@@ -74,7 +74,7 @@ if [ "$1" != "--fast" ] ; then
 
   if [ -f utils/relaxng.xml -a -x "$(which xmllint)" ] >&2
   then
-    if xmllint --noout --relaxng utils/relaxng.xml src/chrome/content/rules/*.xml
+    if xmllint --noout --relaxng utils/relaxng.xml src/lib/rules/*.xml
     then
       echo Validation of rulesets with RELAX NG grammar completed. >&2
     else
@@ -136,8 +136,8 @@ if [ "$ret" != 0 ]; then
     rm -f "../$XPI_NAME"
     exit "$?"
 else
-  echo >&2 "Total included rules: `find chrome/content/rules -name "*.xml" | wc -l`"
-  echo >&2 "Rules disabled by default: `find chrome/content/rules -name "*.xml" | xargs grep -F default_off | wc -l`"
+  echo >&2 "Total included rules: `find rules -name "*.xml" | wc -l`"
+  echo >&2 "Rules disabled by default: `find rules -name "*.xml" | xargs grep -F default_off | wc -l`"
   echo >&2 "Created $XPI_NAME"
   # Push to Android Firefox
   echo Pushing "$XPI_NAME" to /sdcard/"$XPI_NAME"

@@ -1,5 +1,0 @@
-<ruleset name="Squirrel-webmail.surftown.com">
-  <target host="squirrel-webmail.surftown.com" />
-
-  <rule from="^http://squirrel-webmail\.surftown\.com/" to="https://squirrel-webmail.surftown.com/" />
-</ruleset>

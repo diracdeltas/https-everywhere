@@ -1,7 +1,0 @@
-<ruleset name="Emsisoft">
-	<target host="emsisoft.com" />
-	<target host="www.emsisoft.com" />
-	<rule from="^http://www\.emsisoft\.com/" to="https://www.emsisoft.com/"/>
-	<rule from="^http://emsisoft\.com/" to="https://www.emsisoft.com/"/>
-</ruleset>
-

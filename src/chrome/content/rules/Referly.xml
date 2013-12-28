@@ -1,6 +1,0 @@
-<ruleset name="Referly">
-  <target host="www.refer.ly" />
-  <target host="refer.ly" />
-
-  <rule from="^http://(?:www\.)?refer\.ly/" to="https://refer.ly/"/>
-</ruleset>

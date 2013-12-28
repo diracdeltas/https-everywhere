@@ -1,6 +1,0 @@
-<ruleset name="JANET">
-  <target host="ja.net" />
-  <target host="www.ja.net" />
-
-  <rule from="^http://(?:www\.)?ja\.net/" to="https://www.ja.net/"/>
-</ruleset>

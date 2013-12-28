@@ -1,9 +1,0 @@
-<ruleset name="BTC Buy">
-
-	<target host="btcbuy.info" />
-	<target host="www.btcbuy.info" />
-
-	<rule from="^http://(www\.)?btcbuy\.info/"
-		to="https://$1btcbuy.info/" />
-
-</ruleset>

@@ -1,7 +1,0 @@
-<ruleset name="IMF.org">
-  <target host="www.imf.org" />
-  <target host="imf.org" />
-  <rule from="^http://www\.imf\.org/" to="https://www.imf.org/"/>
-  <rule from="^http://imf\.org/" to="https://www.imf.org/"/>
-</ruleset>
-

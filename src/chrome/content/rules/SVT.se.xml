@@ -1,8 +1,0 @@
-<!-- https://trac.torproject.org/projects/tor/ticket/8496 -->
-<ruleset name="SVT.se (mismatches)" default_off="Akamai">
-	<target host="svt.se" />
-	<target host="www.svt.se" />
-	<rule from="^http://svt\.se/" to="https://svt.se/"/>
-	<rule from="^http://www\.svt\.se/" to="https://svt.se/"/>
-</ruleset>
-

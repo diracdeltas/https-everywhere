@@ -1,8 +1,0 @@
-<ruleset name="FooFighters">
-  <target host="foofighters.com" />
-  <target host="www.foofighters.com" />
-
-  <securecookie host="^(.+\.)?foofighters\.com$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?foofighters\.com/" to="https://www.foofighters.com/"/>
-</ruleset>

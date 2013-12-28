@@ -1,6 +1,0 @@
-<ruleset name="Myspace (mixed content)" platform="mixedcontent">
-	<target host="www.myspace.com" />
-	<target host="myspace.com" />
-    <exclusion pattern="^http://([^/:@\.]+)myspacecdn.com/" />
-	<rule from="^http://(?:www\.)?myspace\.com/" to="https://www.myspace.com/"/>
-</ruleset>

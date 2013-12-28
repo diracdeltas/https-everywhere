@@ -1,6 +1,0 @@
-<ruleset name="Foursquare.com">
-  <target host="foursquare.com" />
-  <target host="www.foursquare.com" />
-
-  <rule from="^http://(?:www\.)?foursquare\.com/" to="https://foursquare.com/" />
-</ruleset>

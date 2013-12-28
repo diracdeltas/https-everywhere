@@ -1,6 +1,0 @@
-<ruleset name="Trashmail" platform="mixedcontent">
-  <target host="trashmail.net" />
-  <target host="www.trashmail.net" />
-
-  <rule from="^http://(?:www\.)?trashmail\.net/" to="https://ssl.trashmail.net/"/>
-</ruleset>

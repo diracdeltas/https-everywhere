@@ -1,8 +1,0 @@
-<ruleset name="OverClockers.co.uk" platform="mixedcontent">
-  <target host="overclockers.co.uk" />
-  <target host="www.overclockers.co.uk" />
-
-  <rule from="^http://(?:www\.)?overclockers\.co\.uk/" to="https://www.overclockers.co.uk/"/>
-
-  <securecookie host="^www\.overclockers\.co\.uk" name=".*"/>
-</ruleset>

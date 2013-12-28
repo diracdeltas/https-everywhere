@@ -1,9 +1,0 @@
-<ruleset name="24 ways (partial)" platform="mixedcontent">
-
-	<target host="cloud.24way.org"/>
-	<target host="media.24way.org"/>
-
-	<rule from="^http://(?:cloud|media)\.24ways\.org/"
-		to="https://s3.amazonaws.com/media.24ways.org/"/>
-
-</ruleset>

@@ -1,9 +1,0 @@
-<!-- Gothenburg university -->
-<!-- lots of subdomains lack ssl, and the site does less intelligent rewriteing. how to fix?.-->
-<ruleset name="GU.se" platform="mixedcontent">
-	<target host="www.gu.se" />
-	<target host="gu.se" />
-	<rule from="^http://gu\.se/" to="https://www.gu.se/"/>
-	<rule from="^http://www\.gu\.se/" to="https://www.gu.se/"/>
-</ruleset>
-

@@ -1,6 +1,0 @@
-<ruleset name="Fefe" platform="cacert">
-  <target host="blog.fefe.de" />
-
-  <rule from="^http://blog\.fefe\.de/" to="https://blog.fefe.de/"/>
-</ruleset>
-

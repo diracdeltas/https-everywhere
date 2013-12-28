@@ -1,8 +1,0 @@
-<ruleset name="Aeriagames">
-	<target host="www.aeriagames.com" />
-	<target host="aeriagames.com" />
-	<target host="*.aeriastatic.com" />
-	<rule from="^http://(?:www\.)?aeriagames\.com/" to="https://www.aeriagames.com/"/>
-	<rule from="^https?://[cs]\.aeriastatic\.com/"
-		to="https://c.aeriastatic.com/" />
-</ruleset>

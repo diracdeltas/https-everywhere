@@ -1,5 +1,0 @@
-<ruleset name="Wippies Webmail">
-  <target host="webmail.wippies.com" />
-
-  <rule from="^http://webmail\.wippies\.com/" to="https://webmail.wippies.com/" />
-</ruleset>

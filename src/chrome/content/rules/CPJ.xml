@@ -1,6 +1,0 @@
-<ruleset name="CPJ">
-  <target host="www.cpj.org" />
-  <target host="cpj.org" />
-
-  <rule from="^http://(?:www\.)?cpj\.org/" to="https://www.cpj.org/"/>
-</ruleset>

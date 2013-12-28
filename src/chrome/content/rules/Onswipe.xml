@@ -1,9 +1,0 @@
-<ruleset name="Onswipe">
-
-	<target host="*.onswipe.com" />
-
-
-	<rule from="^https?://(cdn|plug)\.onswipe\.com/"
-		to="https://s3.amazonaws.com/$1.onswipe.com/" />
-
-</ruleset>

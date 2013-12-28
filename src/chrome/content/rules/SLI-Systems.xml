@@ -1,9 +1,0 @@
-<ruleset name="SLI Systems (partial)">
-
-	<target host="assets.resultspage.com"/>
-	<target host="assets.slisystems.com"/>
-
-	<rule from="^http://assets\.(resultspage|slisystems)\.com/"
-		to="https://assets.$1.com/"/>
-
-</ruleset>

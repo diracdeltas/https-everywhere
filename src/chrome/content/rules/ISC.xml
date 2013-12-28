@@ -1,6 +1,0 @@
-<ruleset name="ISC">
-  <target host="isc.org" />
-  <target host="www.isc.org" />
-
-  <rule from="^http://(?:www\.)?isc\.org/" to="https://www.isc.org/"/>
-</ruleset>

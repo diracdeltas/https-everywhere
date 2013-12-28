@@ -1,6 +1,0 @@
-<ruleset name="Food Allergy Initiative">
-	<target host="faiusa.org" />
-	<target host="www.faiusa.org" />
-
-	<rule from="^http://(?:www\.)?faiusa\.org/" to="https://www.faiusa.org/" />
-</ruleset>

@@ -1,8 +1,0 @@
-<ruleset name="Post-Click Marketing (partial)">
-
-	<target host="ion.postclickmarketing.com"/>
-
-	<rule from="^http://ion\.postclickmarketing\.com/"
-		to="https://ion.postclickmarketing.com/"/>
-
-</ruleset>

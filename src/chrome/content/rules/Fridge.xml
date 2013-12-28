@@ -1,8 +1,0 @@
-<ruleset name="Fridge">
-  <target host="frid.ge" />
-  <target host="www.frid.ge" />
-
-  <securecookie host="^(.+\.)?frid\.ge$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?frid\.ge/" to="https://frid.ge/"/>
-</ruleset>

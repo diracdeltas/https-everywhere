@@ -1,7 +1,0 @@
-<ruleset name="Jappix">
-  <target host="jappix.com" />
-  <target host="www.jappix.com" />
-
-  <rule from="^http://(?:www\.)?jappix\.com/" to="https://www.jappix.com/"/>
-</ruleset>
-

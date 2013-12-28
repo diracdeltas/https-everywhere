@@ -1,7 +1,0 @@
-<ruleset name="Ryanair.com" platform="mixedcontent">
-  <target host="www.ryanair.com" />
-  <target host="ryanair.com" />
-  <rule from="^http://www\.ryanair\.com/" to="https://www.ryanair.com/"/>
-  <rule from="^http://ryanair\.com/" to="https://www.ryanair.com/"/>
-</ruleset>
-

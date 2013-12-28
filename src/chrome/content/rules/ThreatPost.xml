@@ -1,8 +1,0 @@
-<ruleset name="ThreatPost" platform="mixedcontent">
-  <target host="threatpost.com" />
-  <target host="www.threatpost.com" />
-
-  <securecookie host="^(.+\.)?threatpost\.com$" name=".*"/>
-
-  <rule from="^http://(?:www\.)?threatpost\.com/" to="https://threatpost.com/"/>
-</ruleset>

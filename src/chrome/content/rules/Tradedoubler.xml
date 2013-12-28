@@ -1,9 +1,0 @@
-<ruleset name="Tradedoubler">
-
-	<target host="publisher.tradedoubler.com" />
-
-
-	<rule from="^http://publisher\.tradedoubler\.com/"
-		to="https://publisher.tradedoubler.com/" />
-
-</ruleset>

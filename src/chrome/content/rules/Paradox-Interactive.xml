@@ -1,8 +1,0 @@
-<ruleset name="Paradox Interactive (partial)">
-
-	<target host="connect.paradoxplaza.com"/>
-
-	<rule from="^http://connect\.paradoxplaza\.com/"
-		to="https://connect.paradoxplaza.com/"/>
-
-</ruleset>
