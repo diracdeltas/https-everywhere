@@ -1,5 +1,7 @@
 // LOG LEVELS ---
 
+var EXPORTED_SYMBOLS = ["xpcom_generateQI"];
+
 VERB=1;
 DBUG=2;
 INFO=3;
@@ -26,11 +28,6 @@ const CI = Components.interfaces;
 const CC = Components.classes;
 const CU = Components.utils;
 const CR = Components.results;
-const Ci = Components.interfaces;
-const Cc = Components.classes;
-const Cu = Components.utils;
-const Cr = Components.results;
-
 
 const SERVICE_CTRID = "@eff.org/https-everywhere;1";
 const SERVICE_ID=Components.ID("{32c165b4-fe5e-4964-9250-603c410631b4}");
@@ -610,5 +607,10 @@ if (XPCOMUtils.generateNSGetFactory)
 else
     var NSGetModule = XPCOMUtils.generateNSGetModule([HTTPSEverywhere]);
 
-HTTPSEverywhere.prototype.bootstrapInit();
+function main() {
+  HTTPSEverywhere.prototype.bootstrapInit();
+  HTTPSEverywhere.log(WARN, "bootstrapped registering ourselves as a component");
+}
+
+main();
 /* vim: set tabstop=4 expandtab: */
