@@ -70,15 +70,15 @@ httpsEverywhere.toolbarButton = {
       var strings = document.getElementById('HttpsEverywhereStrings');
       var msg = strings.getString('https-everywhere.toolbar.hint');
       var hint = nBox.appendNotification(
-        msg, 
-        'https-everywhere', 
-        'chrome://https-everywhere/skin/https-everywhere-24.png', 
+        msg,
+        'https-everywhere',
+        'chrome://https-everywhere/skin/https-everywhere-24.png',
         nBox.PRIORITY_WARNING_MEDIUM,
-	[],
-	function(action) {
-	  // see https://developer.mozilla.org/en-US/docs/XUL/Method/appendNotification#Notification_box_events
-	  gBrowser.selectedTab = gBrowser.addTab(faqURL);
-	}
+        [],
+	      function(action) {
+	        // see https://developer.mozilla.org/en-US/docs/XUL/Method/appendNotification#Notification_box_events
+	        gBrowser.selectedTab = gBrowser.addTab(faqURL);
+	      }
       );
     }
     gBrowser.removeEventListener("DOMContentLoaded", tb.handleShowHint, true);
