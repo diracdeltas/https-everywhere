@@ -367,9 +367,8 @@ HTTPSEverywhere.prototype = {
       return null;
     }
     try {
-      var loadContext = nc.getInterface(CI.nsILoadContext);
-      dump("loadContext = " + loadContext + "\n");
-      var browser = loadContext.topFrameElement;
+      var domWin = nc.getInterface(Components.interfaces.nsIDOMWindow);
+      var browser = gBrowser.getBrowserForDocument(domWin.top.document);
     } catch(e) {
       this.log(INFO, "No <browser> element associated with request: " + channel.URI.spec);
       return null;
