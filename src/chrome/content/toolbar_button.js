@@ -43,23 +43,6 @@ httpsEverywhere.toolbarButton = {
     // make sure icon is proper color during init
     tb.changeIcon();
 
-    // show ruleset counter when a tab is changed
-    tb.updateRulesetsApplied();
-    gBrowser.tabContainer.addEventListener(
-      'TabSelect', 
-      tb.updateRulesetsApplied, 
-      false
-    );
-
-    // hook event for when page loads
-    var onPageLoad = function() {
-      // Timeout is used for a number of reasons.
-      // 1) For Performance since we want to defer computation.
-      // 2) Sometimes the page is loaded before all applied rulesets are
-      //    calculated; in such a case, a half-second wait works.
-      setTimeout(tb.updateRulesetsApplied, 500);
-    };
-
     var appcontent = document.getElementById('appcontent');
     if (appcontent) {
       appcontent.addEventListener('load', onPageLoad, true);
@@ -114,41 +97,6 @@ httpsEverywhere.toolbarButton = {
     } else {
       toolbarbutton.setAttribute('status', 'disabled');
     }
-  },
-
-  /**
-   * Update the rulesets applied counter for the current tab.
-   */
-  updateRulesetsApplied: function() {
-    var toolbarbutton = document.getElementById('https-everywhere-button');
-    var enabled = HTTPSEverywhere.prefs.getBoolPref("globalEnabled");
-    if (!enabled) { 
-      toolbarbutton.setAttribute('rulesetsApplied', 0);
-      return;
-    }
-
-    var browser = window.gBrowser.selectedBrowser;
-    var alist = HTTPSEverywhere.getExpando(browser,"applicable_rules", null);
-    if (!alist) {
-      return;
-    }
-    // Make sure the list is up to date
-    alist.populate_list();
-
-    var counter = 0;
-    for (var x in alist.active) {
-      if (!(x in alist.breaking)) {
-        ++counter;
-      }
-    }
-    for (var x in alist.moot) {
-      if (!(x in alist.active)) {
-        ++counter;
-      }
-    }
-
-    toolbarbutton.setAttribute('rulesetsApplied', counter);
-    HTTPSEverywhere.log(INFO, 'Setting icon counter to: ' + counter);
   }
 };
 
