@@ -43,11 +43,6 @@ httpsEverywhere.toolbarButton = {
     // make sure icon is proper color during init
     tb.changeIcon();
 
-    var appcontent = document.getElementById('appcontent');
-    if (appcontent) {
-      appcontent.addEventListener('load', onPageLoad, true);
-    }
-
     // decide whether to show toolbar hint
     let hintPref = "extensions.https_everywhere.toolbar_hint_shown";
     if (!Services.prefs.getPrefType(hintPref) 
