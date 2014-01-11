@@ -367,7 +367,19 @@ HTTPSEverywhere.prototype = {
       return null;
     }
     try {
-      var domWin = nc.getInterface(Components.interfaces.nsIDOMWindow);
+      try {
+        var domWin = nc.getInterface(Components.interfaces.nsIDOMWindow);
+      } catch(e) {
+        this.log(INFO, "No domWin for " + channel.URI.spec);
+        try {
+          var interfaceRequestor = nc.QueryInterface(Components.interfaces
+              .nsIInterfaceRequestor);
+          var domWin = interfaceRequestor.getInterface(Components.interfaces.nsIDOMWindow);
+        } catch(e) {
+          this.log(INFO, "No interfaceRequestor for " + channel.URI.spec);
+          return null;
+        }
+      }
       var browser = gBrowser.getBrowserForDocument(domWin.top.document);
     } catch(e) {
       this.log(INFO, "No <browser> element associated with request: " + channel.URI.spec);
