@@ -182,10 +182,17 @@ function HTTPSEverywhere() {
   this.https_rules = HTTPSRules;
   this.INCLUDE=INCLUDE;
   this.ApplicableList = ApplicableList;
-  
+
+  // This works around a bug where the mixed content blocker (MCB) for active
+  // content gets disabled and re-enabled if it was originally enabled right
+  // after profile-after-change fires. Until we figure out why this is happening,
+  // just make sure that HTTPSRules.init() doesn't get called twice within
+  // some hard-coded interval of time.
+  this.timeOfLastMCBChange = 0;
+
   this.prefs = this.get_prefs();
   this.rule_toggle_prefs = this.get_prefs(PREFBRANCH_RULE_TOGGLE);
-  
+
   // We need to use observers instead of categories for FF3.0 for these:
   // https://developer.mozilla.org/en/Observer_Notifications
   // https://developer.mozilla.org/en/nsIObserverService.
@@ -537,6 +544,10 @@ HTTPSEverywhere.prototype = {
         // hook on redirections (non persistent, otherwise crashes on 1.8.x)
         catman.addCategoryEntry("net-channel-event-sinks", SERVICE_CTRID,
             SERVICE_CTRID, false, true);
+
+        // Initialize this to the current time, though profile-after-change
+        // really has nothing to do with MCB. Better var name?
+        this.timeOfLastMCBChange = new Date().getTime();
       }
     } else if (topic == "sessionstore-windows-restored") {
       this.log(DBUG,"Got sessionstore-windows-restored");
@@ -545,10 +556,22 @@ HTTPSEverywhere.prototype = {
     } else if (topic == "nsPref:changed") {
         // If the user toggles the Mixed Content Blocker settings, reload the rulesets
         // to enable/disable the mixedcontent ones
+        var t1 = new Date().getTime() - this.timeOfLastMCBChange;
         switch (data) {
             case "security.mixed_content.block_active_content":
+                if (t1 < 1000) {
+                  // Unless someone is manually toggling this pref very quickly,
+                  // this probably means we're hitting the bug where MCB gets
+                  // disabled and then immediately re-enabled on startup. Don't
+                  // bother to re-initialize rules in this case.
+                  break;
+                }
+                HTTPSRules.init();
+                this.log(WARN, "initializing in pref change, block active");
+                break;
             case "extensions.https_everywhere.enable_mixed_rulesets":
                 HTTPSRules.init();
+                this.log(WARN, "initializing in pref change, enable mixed");
                 break;
         }
     }
