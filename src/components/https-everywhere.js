@@ -209,8 +209,8 @@ function HTTPSEverywhere() {
   }
 
   var pref_service = Components.classes["@mozilla.org/preferences-service;1"]
-      .getService(Components.interfaces.nsIPrefBranchInternal);
-  var branch = pref_service.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+      .getService(Components.interfaces.nsIPrefBranch);
+  var branch = pref_service.QueryInterface(Components.interfaces.nsIPrefBranch);
 
   branch.addObserver("extensions.https_everywhere.enable_mixed_rulesets",
                          this, false);
