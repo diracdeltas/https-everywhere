@@ -578,7 +578,7 @@ HTTPSEverywhere.prototype = {
       this.log(DBUG,"Got sessionstore-windows-restored");
       this.maybeShowObservatoryPopup();
       this.browser_initialised = true;
-      this.log(WARN, "Initializing Fennec UI");
+      this.log(INFO, "Initializing Fennec UI");
       Cu.import("chrome://https-everywhere/content/code/FennecUI.jsm");
       FennecUI.init();
     } else if (topic == "nsPref:changed") {
