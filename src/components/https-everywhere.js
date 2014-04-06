@@ -105,42 +105,6 @@ const ANYWHERE = 3;
 
 const N_COHORTS = 1000; 
 
-const WP_STATE_START = CI.nsIWebProgressListener.STATE_START;
-const WP_STATE_STOP = CI.nsIWebProgressListener.STATE_STOP;
-const WP_STATE_DOC = CI.nsIWebProgressListener.STATE_IS_DOCUMENT;
-const WP_STATE_START_DOC = WP_STATE_START | WP_STATE_DOC;
-const WP_STATE_RESTORING = CI.nsIWebProgressListener.STATE_RESTORING;
-
-const LF_VALIDATE_ALWAYS = CI.nsIRequest.VALIDATE_ALWAYS;
-const LF_LOAD_BYPASS_ALL_CACHES = CI.nsIRequest.LOAD_BYPASS_CACHE | CI.nsICachingChannel.LOAD_BYPASS_LOCAL_CACHE;
-
-const NS_OK = 0;
-const NS_BINDING_ABORTED = 0x804b0002;
-const NS_BINDING_REDIRECTED = 0x804b0003;
-const NS_ERROR_UNKNOWN_HOST = 0x804b001e;
-const NS_ERROR_REDIRECT_LOOP = 0x804b001f;
-const NS_ERROR_CONNECTION_REFUSED = 0x804b000e;
-const NS_ERROR_NOT_AVAILABLE = 0x804b0111;
-
-const LOG_CONTENT_BLOCK = 1;
-const LOG_CONTENT_CALL = 2;
-const LOG_CONTENT_INTERCEPT = 4;
-const LOG_CHROME_WIN = 8;
-const LOG_XSS_FILTER = 16;
-const LOG_INJECTION_CHECK = 32;
-const LOG_DOM = 64;
-const LOG_JS = 128;
-const LOG_LEAKS = 1024;
-const LOG_SNIFF = 2048;
-const LOG_CLEARCLICK = 4096;
-const LOG_ABE = 8192;
-
-const HTML_NS = "http://www.w3.org/1999/xhtml";
-
-const WHERE_UNTRUSTED = 1;
-const WHERE_TRUSTED = 2;
-const ANYWHERE = 3;
-
 const DUMMY_OBJ = {};
 DUMMY_OBJ.wrappedJSObject = DUMMY_OBJ;
 const DUMMY_FUNC = function() {};
