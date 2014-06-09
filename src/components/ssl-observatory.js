@@ -426,6 +426,16 @@ SSLObservatory.prototype = {
     }
 
     channel.QueryInterface(Ci.nsIHttpChannel);
+    if (channel.URI.schemeIs("about") ||
+        channel.URI.schemeIs("chrome") ||
+        channel.URI.schemeIs("data") ||
+        channel.URI.schemeIs("javascript") ||
+        channel.URI.schemeIs("file") ||
+        channel.URI.schemeIs("resource")) {
+      this.log(INFO, "Got weird URL scheme that has a certchain: "+channel.URI.spec);
+      return;
+    }
+
     var chainEnum = certchain.getChain();
     var chainArray = [];
     var chainArrayFpStr = '';
