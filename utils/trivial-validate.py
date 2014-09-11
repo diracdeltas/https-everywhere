@@ -1,33 +1,37 @@
 #!/usr/bin/python
 
 import argparse
-import sys, re, os
+import sys
+import re
+import os
 
 try:
     from lxml import etree
 except ImportError:
     sys.stderr.write("** Could not import lxml!  Rule validation SKIPPED.\n")
-    sys.stderr.write("** Caution: A resulting build MAY CONTAIN INVALID RULES.\n")
-    sys.stderr.write("** Please install libxml2 and lxml to permit validation!\n")
+    sys.stderr.write(
+        "** Caution: A resulting build MAY CONTAIN INVALID RULES.\n")
+    sys.stderr.write(
+        "** Please install libxml2 and lxml to permit validation!\n")
     sys.exit(0)
 
 parser = argparse.ArgumentParser(
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description="Ruleset validation script.")
 parser.add_argument('--ignoredups', type=str, nargs="*",
-    default="",
-    help="Ignore entries."
-    )
+                    default="",
+                    help="Ignore entries."
+                    )
 parser.add_argument('--dupdir', type=str, nargs="*",
-    default="",
-    help="Duplicate directory."
-    )
+                    default="",
+                    help="Duplicate directory."
+                    )
 parser.add_argument('--quiet', action="store_true",
-    default=False, help="Suppress debug output."
-    )
+                    default=False, help="Suppress debug output."
+                    )
 parser.add_argument('ruleset', metavar='XML directory', type=str, nargs="*",
-    default="src/chrome/content/rules",
-    help='Directory of XML files to validate.')
+                    default="src/chrome/content/rules",
+                    help='Directory of XML files to validate.')
 
 args = parser.parse_args()
 
@@ -35,11 +39,15 @@ ignoredups = [re.compile(val) for val in args.ignoredups]
 dupdir = [val for val in args.dupdir]
 quiet = args.quiet
 
+
 def warn(s):
-    if not quiet: sys.stdout.write("warning: %s\n" % s)
+    if not quiet:
+        sys.stdout.write("warning: %s\n" % s)
+
 
 def fail(s):
     sys.stdout.write("failure: %s\n" % s)
+
 
 def test_not_anchored(tree):
     # Rules not anchored to the beginning of a line.
@@ -49,17 +57,19 @@ def test_not_anchored(tree):
             return False
     return True
 
+
 def test_bad_regexp(tree):
     # Rules with invalid regular expressions.
     """The 'from' rule contains an invalid extended regular expression."""
     for f in tree.xpath("/ruleset/rule/@from") + \
-             tree.xpath("/ruleset/exclusion/@pattern") + \
-             tree.xpath("/ruleset/securecookie/@host"):
+            tree.xpath("/ruleset/exclusion/@pattern") + \
+            tree.xpath("/ruleset/securecookie/@host"):
         try:
             re.compile(f)
         except:
             return False
     return True
+
 
 def test_missing_to(tree):
 
@@ -68,11 +78,12 @@ def test_missing_to(tree):
     # rule end or intended to be different elements.
     """Rule is missing a 'to' value."""
     for rule in tree.xpath("/ruleset/rule"):
-	if not rule.get("to"):
-            warn("'to' attribute missing in %s. " %fi)
+        if not rule.get("to"):
+            warn("'to' attribute missing in %s. " % fi)
             warn("Misplaced end or misnamed element?")
             return False
     return True
+
 
 def test_unescaped_dots(tree):
     # Rules containing unescaped dots outside of brackets and before slash.
@@ -86,18 +97,19 @@ def test_unescaped_dots(tree):
         s = re.sub("^\^https?://", "", f)
         for c in s:
             if c == "\\":
-               escaped = not escaped
+                escaped = not escaped
             elif not escaped and c == "[":
-               bracketed = True
+                bracketed = True
             elif not escaped and c == "]":
-               bracketed = False
+                bracketed = False
             elif not escaped and not bracketed and c == ".":
-               return False
+                return False
             elif not bracketed and c == "/":
-               break
+                break
             else:
-               escaped = False
+                escaped = False
     return True
+
 
 def test_space_in_to(tree):
     # Rules where the to pattern contains a space.
@@ -106,6 +118,7 @@ def test_space_in_to(tree):
         if ' ' in t:
             return False
     return True
+
 
 def test_unencrypted_to(tree):
     # Rules that redirect to something other than https or http.
@@ -125,6 +138,7 @@ def test_unencrypted_to(tree):
             return False
     return True
 
+
 def test_backslash_in_to(tree):
     # Rules containing backslashes in to pattern.
     """The 'to' rule contains a backslash."""
@@ -132,6 +146,7 @@ def test_backslash_in_to(tree):
         if '\\' in t:
             return False
     return True
+
 
 def test_no_trailing_slash(tree):
     # Rules not containing trailing slash in from or to pattern.
@@ -144,10 +159,12 @@ def test_no_trailing_slash(tree):
             return False
     return True
 
+
 def test_lacks_target_host(tree):
     # Rules that lack at least one target host (target tag with host attr).
     """Rule fails to specify at least one target host."""
     return not not tree.xpath("/ruleset/target/@host")
+
 
 def test_bad_target_host(tree):
     # Rules where a target host contains multiple wildcards or a slash.
@@ -159,6 +176,7 @@ def test_bad_target_host(tree):
             return False
     return True
 
+
 def test_duplicated_target_host(tree):
     # Rules where a single target host appears more than once.
     """Rule contains the same target host more than once."""
@@ -166,6 +184,7 @@ def test_duplicated_target_host(tree):
     return len(set(targets)) == len(targets)
 
 printable_characters = set(map(chr, list(range(32, 127))))
+
 
 def test_non_ascii(tree):
     # Rules containing non-printable characters.
@@ -176,12 +195,14 @@ def test_non_ascii(tree):
                 return False
     return True
 
+
 def test_ruleset_name(tree):
     """Rule has name"""
     if tree.xpath("/ruleset/@name"):
         return True
     else:
         return False
+
 
 def get_all_names_and_targets(ds):
     """extract unique names and targets from a list of dirs of xml files"""
@@ -201,9 +222,11 @@ def get_all_names_and_targets(ds):
                 targets.add(target)
     return names, targets
 
+
 def nomes_all(where=sys.argv[1:]):
     """Returns generator to extract all files from a list of files/dirs"""
-    if not where: where=['.']
+    if not where:
+        where = ['.']
     for i in where:
         if os.path.isfile(i):
             yield i
@@ -258,9 +281,9 @@ for fi in nomes_all():
         all_targets.add(target)
 
 if not seen_file:
-   which = "specified" if args else "current"
-   sys.stdout.write("There were no valid XML files in the %s " % which)
-   sys.stdout.write("directory.\n")
-   failure = 3
+    which = "specified" if args else "current"
+    sys.stdout.write("There were no valid XML files in the %s " % which)
+    sys.stdout.write("directory.\n")
+    failure = 3
 
 sys.exit(failure)
