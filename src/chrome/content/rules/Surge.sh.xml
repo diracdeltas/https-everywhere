@@ -11,5 +11,6 @@
 
 	<rule from="^http:"
 		to="https:" />
+  <exclusion pattern="http://test-http\.surge\.sh/" />
 
 </ruleset>
